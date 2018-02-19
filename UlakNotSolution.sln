@@ -5,6 +5,12 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UlakNot.Web", "UlakNot.Web\UlakNot.Web.csproj", "{F8A496D7-135D-4D98-8BAE-6A8E75B769A6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UlakNot.BusinessLayer", "UlakNot.BusinessLayer\UlakNot.BusinessLayer.csproj", "{556BF4FA-0350-46FA-8587-6F75A5A7FBF2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UlakNot.DataLayer", "UlakNot.DataLayer\UlakNot.DataLayer.csproj", "{104F85B4-1024-4507-9231-968C4051D0BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UlakNot.Entity", "UlakNot.Entity\UlakNot.Entity.csproj", "{312ABB05-DE57-4111-B397-04F6CACB2072}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +21,18 @@ Global
 		{F8A496D7-135D-4D98-8BAE-6A8E75B769A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8A496D7-135D-4D98-8BAE-6A8E75B769A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F8A496D7-135D-4D98-8BAE-6A8E75B769A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{556BF4FA-0350-46FA-8587-6F75A5A7FBF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{556BF4FA-0350-46FA-8587-6F75A5A7FBF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{556BF4FA-0350-46FA-8587-6F75A5A7FBF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{556BF4FA-0350-46FA-8587-6F75A5A7FBF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{104F85B4-1024-4507-9231-968C4051D0BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{104F85B4-1024-4507-9231-968C4051D0BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{104F85B4-1024-4507-9231-968C4051D0BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{104F85B4-1024-4507-9231-968C4051D0BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{312ABB05-DE57-4111-B397-04F6CACB2072}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{312ABB05-DE57-4111-B397-04F6CACB2072}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{312ABB05-DE57-4111-B397-04F6CACB2072}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{312ABB05-DE57-4111-B397-04F6CACB2072}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
