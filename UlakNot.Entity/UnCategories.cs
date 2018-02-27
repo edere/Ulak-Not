@@ -15,6 +15,7 @@ namespace UlakNot.Entity
         public string Name { get; set; }
         [StringLength(200)]
         public string Description { get; set; }
-        public List<UnHashtags> Hashtags { get; set; }
+        public virtual List<UnNotes> Notes { get; set; }
+
     }
 }

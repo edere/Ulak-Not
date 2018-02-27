@@ -15,10 +15,10 @@ namespace UlakNot.DataLayer
         public DbSet<UnHashtags>  Hashtags { get; set; }
         public DbSet<UnLike> Unlikes { get; set; }
         public DbSet<UnMessages> Messages { get; set; }
-        public DbSet<UnMessagesReply> ReplyMessages { get; set; }
         public DbSet<UnNotes> Notes { get; set; }
         public DbSet<UnSettings> Settings { get; set; }
         public DbSet<UnUsers> Users { get; set; }
+        public DbSet<UnContact> Contacts { get; set; }
 
     }
 }

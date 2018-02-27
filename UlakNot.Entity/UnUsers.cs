@@ -17,6 +17,8 @@ namespace UlakNot.Entity
         public string Surname { get; set; }
         [Required,StringLength(20)]
         public string Username { get; set; }
+        [StringLength(30), ScaffoldColumn(false)]
+        public string ImageName { get; set; }
         [Required,StringLength(30)]
         public string Password { get; set; }
         [Required,StringLength(75)]
@@ -27,13 +29,14 @@ namespace UlakNot.Entity
         public string University { get; set; }
         [StringLength(150)]
         public string Department { get; set; }
+        [Required, ScaffoldColumn(false)]
         public Guid GuidControl { get; set; }
         public bool ActiveStatus { get; set; }
         public bool AdminAuthority { get; set; }
         public virtual List<UnNotes> Notes { get; set; }
         public virtual List<UnHashtags> Hashtags { get; set; }
         public virtual List<UnLike> Likes { get; set; }
-        public virtual List<UnComments> Comments { get; set; }
-
+        public virtual List<UnComments> Comments { get; set; }       
+        public virtual List<UnMessages> Messages { get; set; }
     }
 }

@@ -45,10 +45,10 @@
     <Compile Include="UnBase.cs" />
     <Compile Include="UnCategories.cs" />
     <Compile Include="UnComments.cs" />
+    <Compile Include="UnContact.cs" />
     <Compile Include="UnHashtags.cs" />
     <Compile Include="UnLike.cs" />
     <Compile Include="UnMessages.cs" />
-    <Compile Include="UnMessagesReply.cs" />
     <Compile Include="UnNotes.cs" />
     <Compile Include="UnSettings.cs" />
     <Compile Include="UnUsers.cs" />

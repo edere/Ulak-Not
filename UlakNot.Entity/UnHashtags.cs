@@ -9,19 +9,15 @@ using System.Threading.Tasks;
 namespace UlakNot.Entity
 {
     [Table("Hashtags")]
-    public class UnHashtags:UnBase
+    public class UnHashtags
     {
-        [Required,StringLength(20)]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+        [Required,StringLength(30)]
         public string Code { get; set; }
-        [Required,StringLength(40)]
-        public string Name { get; set; }
-        [StringLength(150)]
-        public string Description { get; set; }
-        public int CategoryId { get; set; }
-        public virtual UnUsers Owner { get; set; }
-        public virtual List<UnNotes> Notes { get; set; }
-        public virtual List<UnComments> Comments { get; set; }
-        public virtual UnCategories Category { get; set; }
+
+        public virtual UnUsers HashtagUser { get; set; }
+        public virtual UnNotes HashtagNote { get; set; }
 
     }
 }
