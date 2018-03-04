@@ -10,9 +10,8 @@ namespace UlakNot.BusinessLayer
     {
         public CreateDatabase()
         {
-            DataLayer.DatabaseContext db= new DataLayer.DatabaseContext();
-            db.Database.CreateIfNotExists();
-
+            DataLayer.DatabaseContext db = new DataLayer.DatabaseContext();
+            db.Users.ToList();
         }
     }
 }

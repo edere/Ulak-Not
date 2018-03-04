@@ -13,15 +13,20 @@ namespace UlakNot.Entity
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+
         public int FromId { get; set; }
         public int ToId { get; set; }
+
         [Required, StringLength(50)]
         public string Subject { get; set; }
+
         [Required]
         public string Content { get; set; }
+
         public DateTime SendDate { get; set; }
         public bool IsRead { get; set; }
+        public bool DeleteFrom { get; set; }
+        public bool DeleteTo { get; set; }
         public virtual UnUsers From { get; set; }
-
     }
 }

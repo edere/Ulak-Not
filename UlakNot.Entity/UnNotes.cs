@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -9,19 +10,27 @@ using System.Threading.Tasks;
 namespace UlakNot.Entity
 {
     [Table("Notes")]
-    public class UnNotes:UnBase
+    public class UnNotes : UnBase
     {
-        [Required,StringLength(60)]
+        [DisplayName("Not Başlığı"), Required(ErrorMessage = "{0} gereklidir."),
+         StringLength(60)]
         public string Title { get; set; }
-        [Required]
-        public string Content { get; set; }
+
+        [DisplayName("Not İçeriği"), Required(ErrorMessage = "{0} gereklidir.")]
+        public string Text { get; set; }
+
+        [DisplayName("Taslak")]
         public bool Draft { get; set; }
-        public int Like { get; set; }
-        public int HashtagsId { get; set; }
-        public virtual UnUsers Owner { get; set; }
+
+        [DisplayName("Beğenilme")]
+        public int LikeTotal { get; set; }
+
+        [DisplayName("Hashtag")]
+        public int HashtagId { get; set; }
+
         public virtual List<UnHashtags> Hashtags { get; set; }
         public virtual List<UnLike> Likes { get; set; }
         public virtual List<UnComments> Comments { get; set; }
-
+        public virtual UnUsers Owner { get; set; }
     }
 }

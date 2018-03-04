@@ -8,13 +8,11 @@ using System.Threading.Tasks;
 
 namespace UlakNot.Entity
 {
-    [Table("Likes")]
-    public class UnLike
+    [Table("HastingControl")]
+    public class UnNotesUnHashtags
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
 
-        public virtual UnUsers LikedUser { get; set; }
-        public virtual UnNotes Note { get; set; }
+        public virtual UnNotes Notes { get; set; }
+        public virtual UnHashtags Hashtags { get; set; }
     }
 }

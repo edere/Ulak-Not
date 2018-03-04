@@ -33,6 +33,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,10 +47,13 @@
     <Compile Include="UnCategories.cs" />
     <Compile Include="UnComments.cs" />
     <Compile Include="UnContact.cs" />
+    <Compile Include="UnFriend.cs" />
     <Compile Include="UnHashtags.cs" />
     <Compile Include="UnLike.cs" />
     <Compile Include="UnMessages.cs" />
+    <Compile Include="UnMessenger.cs" />
     <Compile Include="UnNotes.cs" />
+    <Compile Include="UnNotesUnHashtags.cs" />
     <Compile Include="UnSettings.cs" />
     <Compile Include="UnUsers.cs" />
   </ItemGroup>

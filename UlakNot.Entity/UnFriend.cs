@@ -8,13 +8,18 @@ using System.Threading.Tasks;
 
 namespace UlakNot.Entity
 {
-    [Table("Likes")]
-    public class UnLike
+    [Table("Friend")]
+    public class UnFriend
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        public virtual UnUsers LikedUser { get; set; }
-        public virtual UnNotes Note { get; set; }
+        public int UserId { get; set; }
+
+        public int FriendId { get; set; }
+
+        public bool Status { get; set; }
+
+        public virtual UnUsers User { get; set; }
     }
 }

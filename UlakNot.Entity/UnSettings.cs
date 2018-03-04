@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -11,14 +12,21 @@ namespace UlakNot.Entity
     [Table("Settings")]
     public class UnSettings
     {
-        [Required,DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ID { get; set; }
-        [Required, StringLength(125)]
+        [Required, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+
+        [DisplayName("Site Adı"), Required(ErrorMessage = "{0} gereklidir."),
+         StringLength(125)]
         public string Title { get; set; }
-        [Required,StringLength(250)]
+
+        [DisplayName("Site Açıklaması"), Required(ErrorMessage = "{0} gereklidir."),
+         StringLength(250)]
         public string Description { get; set; }
-        [StringLength(250)]
+
+        [DisplayName("Anahtar Kelimeler"), StringLength(250)]
         public string Keywords { get; set; }
+
+        [DisplayName("Durum")]
         public bool Status { get; set; }
     }
 }
