@@ -211,6 +211,10 @@
       <Project>{556bf4fa-0350-46fa-8587-6f75a5a7fbf2}</Project>
       <Name>UlakNot.BusinessLayer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\UlakNot.Core\UlakNot.Core.csproj">
+      <Project>{738ab099-f450-4835-8030-3e9d95f000ee}</Project>
+      <Name>UlakNot.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UlakNot.Entity\UlakNot.Entity.csproj">
       <Project>{312abb05-de57-4111-b397-04f6cacb2072}</Project>
       <Name>UlakNot.Entity</Name>
