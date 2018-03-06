@@ -160,6 +160,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdministratorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UyelerController.cs" />
     <Compile Include="Global.asax.cs">
@@ -195,6 +196,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Uyeler\Index.cshtml" />
     <Content Include="Views\Uyeler\Messages.cshtml" />
+    <Content Include="Views\Administrator\Index.cshtml" />
+    <Content Include="Views\Administrator\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
