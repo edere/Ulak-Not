@@ -5,10 +5,11 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using UlakNot.Core;
 
 namespace UlakNot.DataLayer.EntityFramework
 {
-    public class Repository<T> : Singleton where T : class
+    public class Repository<T> : Singleton, IDataAccess<T> where T : class
     {
         private DbSet<T> dbset;
 
