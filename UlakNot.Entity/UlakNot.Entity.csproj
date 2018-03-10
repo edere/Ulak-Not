@@ -56,7 +56,10 @@
     <Compile Include="UnNotesUnHashtags.cs" />
     <Compile Include="UnSettings.cs" />
     <Compile Include="UnUsers.cs" />
+    <Compile Include="UserObjects\LoginModel.cs" />
+    <Compile Include="UserObjects\RegisterModel.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

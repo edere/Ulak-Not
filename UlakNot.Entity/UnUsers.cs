@@ -42,10 +42,10 @@ namespace UlakNot.Entity
         public string Password { get; set; }
 
         [DisplayName("Cinsiyet")]
-        public bool Gender { get; set; }
+        public bool? Gender { get; set; }
 
         [DisplayName("Doğum Tarihi")]
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
 
         [DisplayName("Üniversite"),
         StringLength(150)]

@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Ulak Not" />
+    <meta name="keywords" content="ulak,not" />
+    <meta name="robots" content="index, follow" />
+    <title>@ViewBag.Title</title>
+
+    <!-- CSS
+    ================================================= -->
+    <link rel="stylesheet" href="~/Assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Assets/css/style.css" />
+    <link rel="stylesheet" href="~/Assets/css/ionicons.min.css" />
+    <link rel="stylesheet" href="~/Assets/css/font-awesome.min.css" />
+
+    <!--Google Font-->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
+
+    <!--Favicon-->
+    <link rel="shortcut icon" type="image/png" href="Assets/images/fav.png" />
+</head>
+<body>
+
+    <div>
+        <!-- Header
+        ================================================= -->
+        <header id="header-inverse">
+            <nav class="navbar navbar-default navbar-fixed-top menu">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Menü</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="index.html"><img src="~/Assets/images/logoulaknot.png" alt="logo" /></a>
+                    </div>
+                </div><!-- /.container -->
+            </nav>
+        </header>
+        <!--Header End-->
+        @RenderBody()
+    </div>
+
+    @RenderSection("scripts", false)
+</body>
+</html>

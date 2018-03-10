@@ -1,0 +1,154 @@
+﻿@using UlakNot.Entity.UserObjects
+@model LoginModel
+
+@{
+    ViewBag.Title = "Giriş Yap";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+<link href="~/Assets/css/validation-summary.css" rel="stylesheet" />
+
+<!-- Açılış Sayfası İçeriği
+================================================= -->
+<div id="lp-register">
+    <div class="container wrapper">
+        <div class="row">
+            <div class="col-sm-5">
+                <div class="intro-texts">
+                    <h1 class="text-white">Aradığınız Notlara Erişin !!!</h1>
+                    <p>UlakNot kişilerin ders notlarına erişebileceği bir sosyal ağdır. UlakNot üzerinden etkileşimli olarak not paylaşabilir, notları görebilirsiniz. <br /> <br />Ne bekliyorsunuz? UlakNot'lu olun!</p>
+                    <button class="btn btn-primary">Learn More</button>
+                </div>
+            </div>
+            <div class="col-sm-6 col-sm-offset-1">
+                <div id="login-overlay" class="modal-dialog">
+                    <div class="modal-content">
+                        @Html.ValidationSummary()
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <div class="well">
+                                        <form id="loginForm" method="POST" action="~/Home/Login">
+                                            <div class="form-group">
+                                                <label for="username" class="control-label">Kullanıcı Adı</label>
+                                                <input type="text" class="form-control" id="username" name="Username" value="" required="" title="Please enter you username" placeholder="example@gmail.com">
+                                                <span class="help-block"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="password" class="control-label">Şifre</label>
+                                                <input type="password" class="form-control" id="password" name="Password" value="" required="" title="Please enter your password">
+                                                <span class="help-block"></span>
+                                            </div>
+                                            <div id="loginErrorMsg" class="alert alert-error hide">Wrong username og password</div>
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" name="remember" id="remember"> Beni Hatırla
+                                                </label>
+                                            </div>
+                                            <button type="submit" class="btn btn-success btn-block">Giriş Yap</button>
+                                            <a href="/forgot/" class="btn btn-default btn-block">Şifremi Unuttum</a>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <p class="lead">Register now for <span class="text-success">FREE</span></p>
+                                    <ul class="list-unstyled" style="line-height: 2">
+                                        <li><span class="fa fa-check text-success"></span> See all your orders</li>
+                                        <li><span class="fa fa-check text-success"></span> Fast re-order</li>
+                                        <li><span class="fa fa-check text-success"></span> Save your favorites</li>
+                                        <li><span class="fa fa-check text-success"></span> Fast checkout</li>
+                                        <li><span class="fa fa-check text-success"></span> Get a gift <small>(only new customers)</small></li>
+                                        <li><a href="/read-more/"><u>Read more</u></a></li>
+                                    </ul>
+                                    <p><a href="/new-customer/" class="btn btn-info btn-block">Yes please, register now!</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-6">
+
+                <!--Sosyal Medyalar-->
+                <ul class="list-inline social-icons">
+                    <li><a href="#"><i class="icon ion-social-facebook"></i></a></li>
+                    <li><a href="#"><i class="icon ion-social-twitter"></i></a></li>
+                    <li><a href="#"><i class="icon ion-social-googleplus"></i></a></li>
+                    <li><a href="#"><i class="icon ion-social-pinterest"></i></a></li>
+                    <li><a href="#"><i class="icon ion-social-linkedin"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--preloader-->
+<div id="spinner-wrapper">
+    <div class="spinner"></div>
+</div>
+
+<!--
+
+<h3 class="text-center m-0">
+    <a href="#" class="logo logo-admin"><img src="~/Assets/images/logoulaknot.png" height="30" alt="logo"></a>
+</h3>
+
+<div class="p-3">
+
+    <form data-toggle="validator" class="form-horizontal" method="post" action="~/Home/Login">
+        @*@using (Html.BeginForm("Signin", "Authentication", FormMethod.Post, new { @class = "form-horizontal m-t-30", enctype = "multipart/form-data", data_toggle = "validator" }))
+            {*@
+
+        <div class="form-group has-feedback">
+            @*@Html.Label(KimO.Resources.Resources.username, new { @class = "help-block-label" })*@
+            <label class="help-block-label" for="username">Usurname</label>
+            @*@Html.TextBoxFor(model => model.e_mail, new { @class = "form-control", type = "text", required = "required", pattern = @"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$", enctype = "multipart/form-data", data_error = KimO.Resources.Resources.email_valid })*@
+            <input type="text" class="form-control" name="e_mail" id="inputMail" pattern="^([a-zA-Z0-9_\-\.]+)+&#64;((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" data-error="Hatalı Mail" required>
+
+            <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group has-feedback">
+            <label class="help-block-label" for="userpassword">Şifre</label>
+            <input type="password" class="form-control" name="password" id="inputPassword" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$" data-error="Hatal şifre" required>
+            <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group row m-t-20">
+            @*<div class="col-sm-6">
+                    <label class="custom-control mt-2 custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                        <input type="checkbox" id="rememberme" name="Remember" class="custom-control-input">
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">@Html.Raw(KimO.Resources.Resources.p_login_remember)</span>
+                    </label>
+                </div>*@
+            <div class="col-sm-6 text-right">
+                <button class="btn btn-primary" type="submit">Giriş Yap</button>
+            </div>
+        </div>
+
+        <div class="form-group m-t-10 mb-0 row">
+            <div class="col-8 m-t-20">
+                <a href="~/Authentication/RecoverPassword" class="text-muted"><i class="mdi mdi-lock"></i>Şifremi unuttum</a>
+            </div>
+            @*<div class="col-4 m-t-10">
+                    @Html.ImageActionLink("Turkish", "ChangeLanguage", "Authentication", new { LanguageAbbrevation = "tr", redirectUrl = this.Request.RawUrl }, new { @class = "nav-link dropdown-toggle arrow-none waves-effect text-muted p-r-5" }, "~/Content/images/flags/turkey_flag.png")
+                    @Html.ImageActionLink("English", "ChangeLanguage", "Authentication", new { LanguageAbbrevation = "en", redirectUrl = this.Request.RawUrl }, new { @class = "nav-link dropdown-toggle arrow-none waves-effect text-muted p-l-5" }, "~/Content/images/flags/uk_flag.png")
+                </div>*@
+        </div>
+        @*}*@
+    </form>
+</div>
+-->
+
+@section scripts{
+    <script src="~/Assets/validator/validator.js"></script>
+    <script src="~/Assets/js/jquery-3.1.1.min.js"></script>
+    <script src="~/Assets/js/bootstrap.min.js"></script>
+    <script src="~/Assets/js/jquery.appear.min.js"></script>
+    <script src="~/Assets/js/jquery.incremental-counter.js"></script>
+    <script src="~/Assets/js/script.js"></script>
+    <script src="~/Assets/js/bootstrap.min.js"></script>
+
+}

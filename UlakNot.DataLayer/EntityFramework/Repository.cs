@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using UlakNot.Core;
+using UlakNot.Entity;
 
 namespace UlakNot.DataLayer.EntityFramework
 {
@@ -28,6 +29,11 @@ namespace UlakNot.DataLayer.EntityFramework
             return dbset.Where(where).ToList();
         }
 
+        public IQueryable<T> ListQueryable()
+        {
+            return dbset.AsQueryable<T>();
+        }
+
         public int Save()
         {
             return context.SaveChanges();
@@ -36,11 +42,28 @@ namespace UlakNot.DataLayer.EntityFramework
         public int Insert(T obj)
         {
             dbset.Add(obj);
+
+            if (obj is UnBase)
+            {
+                UnBase b = new UnBase();
+                DateTime now = DateTime.Now;
+
+                b.CreatedDate = now;
+                b.UpdatedDate = now;
+            }
+
             return Save();
         }
 
         public int Update(T obj)
         {
+            if (obj is UnBase)
+            {
+                UnBase b = new UnBase();
+                DateTime now = DateTime.Now;
+
+                b.UpdatedDate = now;
+            }
             return Save();
         }
 
