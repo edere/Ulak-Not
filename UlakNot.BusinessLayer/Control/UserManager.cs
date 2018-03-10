@@ -57,12 +57,22 @@ namespace UlakNot.BusinessLayer.Control
 
         public ErrorResult<UnUsers> LoginUser(LoginModel data)
         {
-            ErrorResult<UnUsers> error_res = new ErrorResult<UnUsers>();
-            UnUsers user = repo_user.Find(x => x.Username == data.Username && x.Password == data.Password);
+            ErrorResult<UnUsers> errorRes = new ErrorResult<UnUsers>();
+            errorRes.Result = repo_user.Find(x => x.Username == data.Username && x.Password == data.Password);
 
-            if (user != null)
+            if (errorRes.Result != null)
             {
+                if (!errorRes.Result.ActiveStatus)
+                {
+                    errorRes.Error.Add("Kullanıcı aktif değildir, lütfen e-posta adresinize gönderilen aktifleşme linkine tıklayınız!");
+                }
             }
+            else
+            {
+                errorRes.Error.Add("Kullanıcı adı veya şifre yanlış girildi!");
+            }
+
+            return errorRes;
         }
     }
 }

@@ -20,6 +20,21 @@ namespace UlakNot.Web.Controllers
         [HttpPost]
         public ActionResult Login(LoginModel model)
         {
+            if (ModelState.IsValid)
+            {
+                UserManager um = new UserManager();
+                ErrorResult<UnUsers> res = um.LoginUser(model);
+
+                if (res.Error.Count > 0)
+                {
+                    res.Error.ForEach(x => ModelState.AddModelError("", x));
+                    return View(model);
+                }
+
+                Session["login"] = res.Result;
+                RedirectToAction("Index");
+            }
+
             return View(model);
         }
 
