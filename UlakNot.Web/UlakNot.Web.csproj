@@ -1126,6 +1126,7 @@
     <Content Include="Assets\css\bootstrap-theme.min.css" />
     <Content Include="Assets\css\bootstrap.css" />
     <Content Include="Assets\css\bootstrap.min.css" />
+    <Content Include="Assets\css\categories.css" />
     <Content Include="Assets\css\emoji.css" />
     <Content Include="Assets\css\font-awesome.min.css" />
     <Content Include="Assets\css\ionicons.min.css" />
@@ -1531,6 +1532,7 @@
     <Content Include="Assets\Administrator\nprogress\Notes.md" />
     <Content Include="Assets\Administrator\nprogress\Readme.md" />
     <Content Include="Views\Home\Register.cshtml" />
+    <Content Include="Views\Shared\_PartialCategory.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

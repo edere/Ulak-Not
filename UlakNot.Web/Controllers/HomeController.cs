@@ -40,7 +40,8 @@ namespace UlakNot.Web.Controllers
 
         public ActionResult Logout()
         {
-            return View();
+            Session.Clear();
+            return RedirectToAction("Login");
         }
 
         public ActionResult Register()
