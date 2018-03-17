@@ -89,26 +89,42 @@
                     </div>
                 </div>
                 <div class="post-footer">
-                    <div class="input-group">
-                        <input class="form-control" placeholder="Add a comment" type="text">
-                        <span class="input-group-addon">
-                            <a href="#"><i class="fa fa-edit"></i></a>
-                        </span>
-                    </div>
-                    <ul class="comments-list">
-                        <li class="comment">
-                            <a class="pull-left" href="#">
-                                <img class="img-circle avatar" src="https://bootdey.com/img/Content/user_1.jpg" alt="avatar">
-                            </a>
-                            <div class="comment-body">
-                                <div class="comment-heading">
-                                    <h4 class="user">Gavino Free</h4>
-                                    <h5 class="time">5 minutes ago</h5>
-                                </div>
-                                <p>Sure, oooooooooooooooohhhhhhhhhhhhhhhh</p>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="well well-lg">
+                                    <div class="media1">
+                                        <a class="pull-left" href="#">
+                                            <img class="media-object img-circle" width="80px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACDUlEQVR4Xu2Yz6/BQBDHpxoEcfTjVBVx4yjEv+/EQdwa14pTE04OBO+92WSavqoXOuFp+u1JY3d29rvfmQ9r7Xa7L8rxY0EAOAAlgB6Q4x5IaIKgACgACoACoECOFQAGgUFgEBgEBnMMAfwZAgaBQWAQGAQGgcEcK6DG4Pl8ptlsRpfLxcjYarVoOBz+knSz2dB6vU78Lkn7V8S8d8YqAa7XK83ncyoUCjQej2m5XNIPVmkwGFC73TZrypjD4fCQAK+I+ZfBVQLwZlerFXU6Her1eonreJ5HQRAQn2qj0TDukHm1Ws0Ix2O2260RrlQqpYqZtopVAoi1y+UyHY9Hk0O32w3FkI06jkO+74cC8Dh2y36/p8lkQovFgqrVqhFDEzONCCoB5OSk7qMl0Gw2w/Lo9/vmVMUBnGi0zi3Loul0SpVKJXRDmphvF0BOS049+n46nW5sHRVAXMAuiTZObcxnRVA5IN4DJHnXdU3dc+OLP/V63Vhd5haLRVM+0jg1MZ/dPI9XCZDUsbmuxc6SkGxKHCDzGJ2j0cj0A/7Mwti2fUOWR2Km2bxagHgt83sUgfcEkN4RLx0phfjvgEdi/psAaRf+lHmqEviUTWjygAC4EcKNEG6EcCOk6aJZnwsKgAKgACgACmS9k2vyBwVAAVAAFAAFNF0063NBAVAAFAAFQIGsd3JN/qBA3inwDTUHcp+19ttaAAAAAElFTkSuQmCC" alt="Generic placeholder image">
+                                        </a>
+                                        <div class="media-body">
+
+                                            <div class="form-group" style="padding:12px;">
+                                                <textarea class="form-control animated" placeholder="Yorum Gönder"></textarea>
+                                                <button class="btn btn-info pull-right" style="margin-top:10px" type="button">Gönder</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>  <!-- well-sm -->
                             </div>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
+                    <div class="panel panel-white">
+                        <ul class="comments-list">
+                            <li class="comment">
+                                <a class="pull-left" href="#">
+                                    <img class="img-circle avatar" src="https://bootdey.com/img/Content/user_1.jpg" alt="avatar">
+                                </a>
+                                <div class="comment-body">
+                                    <div class="comment-heading">
+                                        <h4 class="user">Gavino Free</h4>
+                                        <h5 class="time">5 minutes ago</h5>
+                                    </div>
+                                    <p>Sure, oooooooooooooooohhhhhhhhhhhhhhhh</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -117,6 +133,9 @@
 
 @section scripts
 {
+
+    <script src="~/Assets/js/YorumAutosize.js"></script>
+
     <script>
         $(function () {
             var postActions = $('#list_PostActions');
@@ -135,4 +154,13 @@
             });
         });
     </script>
+
+    <!-- Yorum Yazma AutoSize-->
+    <script>
+        $(function () {
+            $('.normal').autosize();
+            $('.animated').autosize({ append: "\n" });
+        });
+    </script>
+
 }

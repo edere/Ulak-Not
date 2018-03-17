@@ -1151,6 +1151,7 @@
     <Content Include="Assets\js\masonry.pkgd.min.js" />
     <Content Include="Assets\js\npm.js" />
     <Content Include="Assets\js\script.js" />
+    <Content Include="Assets\js\YorumAutosize.js" />
     <Content Include="Assets\validator\validator-custom.js" />
     <Content Include="Assets\validator\validator.js" />
     <Content Include="Assets\validator\validator.min.js" />

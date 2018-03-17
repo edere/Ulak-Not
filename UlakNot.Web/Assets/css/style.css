@@ -44,6 +44,14 @@
     - Preloader
 ==================================================*/
 
+/* Yorum Yazma Textbox*/
+.animated {
+    -webkit-transition: height 0.2s;
+    -moz-transition: height 0.2s;
+    transition: height 0.2s;
+    max-height: 15em;
+}
+
 .colorgraph {
     height: 5px;
     border-top: 0;
@@ -2696,11 +2704,12 @@ ul.contact {
             display: block;
             width: 100%;
             margin: 20px 0;
+            margin-left: 20px;
         }
 
             .post .post-footer .comments-list .comment .avatar {
-                width: 35px;
-                height: 35px;
+                width: 45px;
+                height: 45px;
             }
 
             .post .post-footer .comments-list .comment .comment-heading {
@@ -2725,7 +2734,7 @@ ul.contact {
 
             .post .post-footer .comments-list .comment .comment-body {
                 display: inline-block;
-                margin-left: 50px;
+                margin-left: 20px;
             }
 
             .post .post-footer .comments-list .comment > .comments-list {
