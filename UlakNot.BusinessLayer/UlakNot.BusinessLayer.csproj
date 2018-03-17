@@ -50,6 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Control\CategoryManager.cs" />
+    <Compile Include="Control\HashtagManager.cs" />
+    <Compile Include="Control\NoteManager.cs" />
     <Compile Include="Control\UserManager.cs" />
     <Compile Include="CreateDatabase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

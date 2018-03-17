@@ -32,7 +32,7 @@ namespace UlakNot.Web.Controllers
                 }
 
                 Session["login"] = res.Result;
-                RedirectToAction("Index");
+                return RedirectToAction("Index", "Home");
             }
 
             return View(model);
@@ -63,7 +63,7 @@ namespace UlakNot.Web.Controllers
                     return View(model);
                 }
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Home");
             }
 
             return View(model);
@@ -82,8 +82,10 @@ namespace UlakNot.Web.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            BusinessLayer.CreateDatabase dbc = new BusinessLayer.CreateDatabase();
-            return View();
+            NoteManager nm = new NoteManager();
+
+            //BusinessLayer.CreateDatabase dbc = new BusinessLayer.CreateDatabase();
+            return View(nm.GetNotes());
         }
     }
 }

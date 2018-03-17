@@ -2,60 +2,183 @@
 @model RegisterModel
 
 @{
-    ViewBag.Title = "Register";
-    Layout = null;
+    ViewBag.Title = "Kayıt Ol";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
 }
 <link href="~/Assets/css/validation-summary.css" rel="stylesheet" />
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
-<!------ Include the above in your HEAD tag ---------->
-<div class="container">
-    <div class="row">
-        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-            <form id="RegisterForm" method="Post" action="~/Home/Register">
-                <h2>Please Sign Up <small>It's free and always will be.</small></h2>
-                <hr class="colorgraph">
-                @Html.ValidationSummary(false)
-                <div class="row">
-                    <div class="col-xs-12 col-sm-6 col-md-6">
-                        <div class="form-group">
-                            <input type="text" name="Name" id="first_name" class="form-control input-lg" placeholder="First Name" tabindex="1">
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-md-6">
-                        <div class="form-group">
-                            <input type="text" name="Surname" id="last_name" class="form-control input-lg" placeholder="Last Name" tabindex="2">
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <input type="text" name="Username" id="display_name" class="form-control input-lg" placeholder="Display Name" tabindex="3">
-                </div>
-                <div class="form-group">
-                    <input type="email" name="EMail" id="email" class="form-control input-lg" placeholder="Email Address" tabindex="4">
-                </div>
-                <div class="row">
-                    <div class="col-xs-12 col-sm-6 col-md-6">
-                        <div class="form-group">
-                            <input type="password" name="Password" id="password" class="form-control input-lg" placeholder="Password" tabindex="5">
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-md-6">
-                        <div class="form-group">
-                            <input type="password" name="RePassword" id="password_confirmation" class="form-control input-lg" placeholder="Confirm Password" tabindex="6">
-                        </div>
-                    </div>
-                </div>
 
-                <hr class="colorgraph">
-                <div class="row">
-                    <div class="col-xs-12 col-md-6">
-                        <button type="submit" class="btn btn-primary btn-block btn-lg" tabindex="7">Üye Ol</button>
+<div id="lp-register">
+    <div class="container wrapper">
+        <div class="row">
+            <div class="col-sm-5">
+                <div class="intro-texts">
+                    <h2 class="text-white">Aradığınız Notlara Erişin !!!</h2>
+                    <p>UlakNot kişilerin ders notlarına erişebileceği bir sosyal ağdır. UlakNot üzerinden etkileşimli olarak not paylaşabilir, notları görebilirsiniz. <br /> <br />Ne bekliyorsunuz? UlakNot'lu olun!</p>
+                </div>
+            </div>
+            <div class="col-sm-6 col-sm-offset-1">
+                <div id="login-overlay" class="modal-dialog">
+                    <div class="modal-content">
+                        @Html.ValidationSummary()
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="well">
+                                        <form id="loginForm" method="POST" action="~/Home/Register">
+                                            <div class="form-group col-sm-6"><label for="username" class="control-label">Ad</label>
+                                                <input type="text" name="Name" id="first_name" class="form-control" placeholder="Adınız" required="Bu alan boş bırakılamaz" tabindex="1">                                                <span class="help-block"></span>
+                                            </div>
+                                            <div class="form-group col-sm-6"><label for="username" class="control-label">Soyad</label>
+                                                <input type="text" name="Surname" id="last_name" class="form-control" placeholder="Soyadınız" required="Bu alan boş bırakılamaz" tabindex="2">
+                                                <span class="help-block"></span>
+                                            </div>
+                                            <div class="form-group col-sm-6"><label for="username" class="control-label">Kullanıcı Adı</label>
+                                                <input type="text" name="Username" id="user_name" class="form-control" placeholder="Kullanıcı Adı" required="Bu alan boş bırakılamaz" tabindex="3">                                                <span class="help-block"></span>
+                                            </div>
+                                            <div class="form-group col-sm-6"><label for="username" class="control-label">E-Posta</label>
+                                                <input type="text" name="EMail" id="mail_address" class="form-control" placeholder="E-posta Adresiniz" required="Bu alan boş bırakılamaz" tabindex="4">
+                                                <span class="help-block"></span>
+                                            </div>
+                                            <div class="form-group col-sm-6">
+                                                <input type="password" name="Password" id="password" class="form-control" placeholder="Şifre Giriniz" required="Bu alan boş bırakılamaz" tabindex="5">                                                <span class="help-block"></span>
+                                            </div>
+                                            <div class="form-group col-sm-6">
+                                                <input type="password" name="RePassword" id="password_confirmation" class="form-control" placeholder="Şifrenizi Tekrar Giriniz" required="Bu alan boş bırakılamaz" tabindex="6">
+                                                <span class="help-block"></span>
+                                            </div>
+                                            <div id="loginErrorMsg" class="alert alert-error hide">Wrong username og password</div>
+                                            <div class="checkbox">
+
+                                            </div>
+                                            <button type="submit" class="btn btn-primary col-sm-offset-1">Üye Ol</button>
+                                            <input class="btn btn-danger col-sm-offset-5" type="reset" value="Temizle" onclick="localStorage.clear()">
+                                            <a href="/Home/Login/" class="btn btn-success">Giriş Yap</a>
+                                        </form>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-6">
+
+                <!--Sosyal Medyalar-->
+                <ul class="list-inline social-icons">
+                    <li><a href="#"><i class="icon ion-social-facebook"></i></a></li>
+                    <li><a href="#"><i class="icon ion-social-twitter"></i></a></li>
+                    <li><a href="#"><i class="icon ion-social-googleplus"></i></a></li>
+                    <li><a href="#"><i class="icon ion-social-pinterest"></i></a></li>
+                    <li><a href="#"><i class="icon ion-social-linkedin"></i></a></li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
+
+
+
+<div id="spinner-wrapper">
+    <div class="spinner"></div>
+</div>
+
+
+
+
+@section scripts{
+    <script src="~/Assets/validator/validator.js"></script>
+    <script src="~/Assets/js/jquery-3.1.1.min.js"></script>
+    <script src="~/Assets/js/bootstrap.min.js"></script>
+    <script src="~/Assets/js/jquery.appear.min.js"></script>
+    <script src="~/Assets/js/jquery.incremental-counter.js"></script>
+    <script src="~/Assets/js/script.js"></script>
+    <script src="~/Assets/js/bootstrap.min.js"></script>
+
+
+
+    <script>
+
+        var inputstorage = {
+            save: function (e) {
+                $(e).keypress(function (a) {
+                    var o = String.fromCharCode(a.keyCode);
+                    save = $(e).val(),
+                        save += o,
+                        localStorage.setItem(e, save)
+                })
+            }
+        };
+
+        $(document).ready(function () {
+            for (i = 0; i < localStorage.length; i++) {
+                var e = localStorage.key(i),
+                    a = localStorage.getItem(e);
+                $(e).val(a)
+            }
+        });
+
+        inputstorage.save("#first_name");
+        inputstorage.save("#last_name");
+        inputstorage.save("#user_name");
+        inputstorage.save("#mail_address");
+
+        //<input type="submit" value="Gönder" onclick="localStorage.clear()"> silme
+
+    </script>
+
+
+}
+
+<!------ Include the above in your HEAD tag ---------->
+@*<div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+                <form id="RegisterForm" method="Post" action="~/Home/Register">
+                    <h2>Please Sign Up <small>It's free and always will be.</small></h2>
+                    <hr class="colorgraph">
+                    @Html.ValidationSummary(false)
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <input type="text" name="Name" id="first_name" class="form-control input-lg" placeholder="First Name" tabindex="1">
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <input type="text" name="Surname" id="last_name" class="form-control input-lg" placeholder="Last Name" tabindex="2">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="Username" id="display_name" class="form-control input-lg" placeholder="Display Name" tabindex="3">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="EMail" id="email" class="form-control input-lg" placeholder="Email Address" tabindex="4">
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <input type="password" name="Password" id="password" class="form-control input-lg" placeholder="Password" tabindex="5">
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <input type="password" name="RePassword" id="password_confirmation" class="form-control input-lg" placeholder="Confirm Password" tabindex="6">
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="colorgraph">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <button type="submit" class="btn btn-primary btn-block btn-lg" tabindex="7">Üye Ol</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>*@
