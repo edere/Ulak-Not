@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using UlakNot.BusinessLayer.Control;
@@ -12,6 +13,12 @@ namespace UlakNot.Web.Controllers
 {
     public class HomeController : Controller
     {
+        public ActionResult CreateDatabase()
+        {
+            BusinessLayer.CreateDatabase dbc = new BusinessLayer.CreateDatabase();
+            return View(dbc);
+        }
+
         public ActionResult Login()
         {
             return View();
@@ -106,10 +113,25 @@ namespace UlakNot.Web.Controllers
             return View();
         }
 
-        public ActionResult Hashtag(int id)
+        public ActionResult HashtagList()
         {
+            return View();
+        }
+
+        public ActionResult Hashtag(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
             HashtagManager hm = new HashtagManager();
-            UnHashtags hash = hm.HashtagId(id);
+            UnHashtags hash = hm.HashtagId(id.Value);
+
+            if (hash == null)
+            {
+                return HttpNotFound();
+            }
 
             return View("Index", hash.Notes);
         }

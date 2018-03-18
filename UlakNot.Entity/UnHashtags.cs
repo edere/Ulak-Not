@@ -23,8 +23,13 @@ namespace UlakNot.Entity
          StringLength(100, ErrorMessage = "{0} alanı en fazla {1} karakter içermeli.")]
         public string Description { get; set; }
 
+        [DisplayName("Kategori")]
+        public int CategoriesId { get; set; }
+
         public virtual UnUsers HashtagUser { get; set; }
+
         public virtual List<UnNotes> Notes { get; set; }
+
         public virtual UnCategories Categories { get; set; }
     }
 }

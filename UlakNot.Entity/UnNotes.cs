@@ -26,9 +26,9 @@ namespace UlakNot.Entity
         public int LikeTotal { get; set; }
 
         [DisplayName("Hashtag")]
-        public int HashtagId { get; set; }
+        public int HashtagsId { get; set; }
 
-        public virtual List<UnHashtags> Hashtags { get; set; }
+        public virtual UnHashtags Hashtags { get; set; }
         public virtual List<UnLike> Likes { get; set; }
         public virtual List<UnComments> Comments { get; set; }
         public virtual UnUsers Owner { get; set; }
