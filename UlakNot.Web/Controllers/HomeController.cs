@@ -92,7 +92,7 @@ namespace UlakNot.Web.Controllers
             NoteManager nm = new NoteManager();
 
             //BusinessLayer.CreateDatabase dbc = new BusinessLayer.CreateDatabase();
-            return View(nm.GetNotes());
+            return View(nm.GetNotes().OrderByDescending(x => x.CreatedDate).ToList());
         }
 
         public ActionResult Department()
