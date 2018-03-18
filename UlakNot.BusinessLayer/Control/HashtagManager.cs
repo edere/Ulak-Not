@@ -16,5 +16,10 @@ namespace UlakNot.BusinessLayer.Control
         {
             return repo_hashtags.List();
         }
+
+        public UnHashtags HashtagId(int id)
+        {
+            return repo_hashtags.Find(x => x.Id == id);
+        }
     }
 }

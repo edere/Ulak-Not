@@ -1,0 +1,42 @@
+﻿@using UlakNot.BusinessLayer.Control
+@using UlakNot.Entity
+@model List<UnNotes>
+
+@{
+    HashtagManager hm = new HashtagManager();
+    List<UnHashtags> list = hm.GetHashtags();
+}
+
+@{
+    ViewBag.Title = "Department";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section css
+{
+
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+}
+
+<section id="what-we-do">
+    <div class="container-fluid">
+        <h2 class="section-title mb-2 h1">Hashtag Listesi</h2>
+        <p class="text-center text-muted h5">UlakNot zaman makinesi, zamanın ötesindeki tüm hastagları karşınıza serdi! </p>
+        <div class="row mt-5">
+            @{
+                foreach (UnHashtags hashtag in list)
+                {
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+                        <div class="card">
+                            <div class="card-block block-5">
+                                <h3 class="card-title">@hashtag.Code</h3>
+                                <p class="card-text">@hashtag.Description</p>
+                                <a href="/Home/Hashtag/@hashtag.Id" title="Read more" class="read-more">İncele<i class="fa fa-angle-double-right ml-2"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</section>

@@ -1164,6 +1164,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdministratorController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UyelerController.cs" />
     <Compile Include="Global.asax.cs">
@@ -1534,6 +1535,7 @@
     <Content Include="Assets\Administrator\nprogress\Readme.md" />
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Shared\_PartialCategory.cshtml" />
+    <Content Include="Views\Home\Department.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1544,6 +1546,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Category\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UlakNot.BusinessLayer\UlakNot.BusinessLayer.csproj">

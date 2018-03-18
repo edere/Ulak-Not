@@ -87,5 +87,31 @@ namespace UlakNot.Web.Controllers
             //BusinessLayer.CreateDatabase dbc = new BusinessLayer.CreateDatabase();
             return View(nm.GetNotes());
         }
+
+        public ActionResult Department(int? id)
+        {
+            //if (id == null)
+            //{
+            //    //todo: 404 hata sayfası gerçekleştir
+            //}
+
+            //CategoryManager cm = new CategoryManager();
+            //UnCategories cat = cm.GetCategoryId(id);
+
+            //if (cat == null)
+            //{
+            //    //todo: 404 sayfası gerçekleştir
+            //}
+
+            return View();
+        }
+
+        public ActionResult Hashtag(int id)
+        {
+            HashtagManager hm = new HashtagManager();
+            UnHashtags hash = hm.HashtagId(id);
+
+            return View("Index", hash.Notes);
+        }
     }
 }

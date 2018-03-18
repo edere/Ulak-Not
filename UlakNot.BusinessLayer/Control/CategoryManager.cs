@@ -16,5 +16,10 @@ namespace UlakNot.BusinessLayer.Control
         {
             return repo_cat.List();
         }
+
+        public UnCategories GetCategoryId(int id)
+        {
+            return repo_cat.Find(x => x.Id == id);
+        }
     }
 }
