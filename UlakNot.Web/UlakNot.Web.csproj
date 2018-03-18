@@ -1538,6 +1538,8 @@
     <Content Include="Views\Home\Department.cshtml" />
     <Content Include="Views\Shared\_PartialHashtag.cshtml" />
     <Content Include="Views\Home\CreateDatabase.cshtml" />
+    <Content Include="Views\Home\HashtagList.cshtml" />
+    <Content Include="Views\Home\DepartmentId.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

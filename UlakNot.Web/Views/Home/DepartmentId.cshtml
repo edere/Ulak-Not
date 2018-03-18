@@ -1,11 +1,5 @@
-﻿@using UlakNot.BusinessLayer.Control
-@using UlakNot.Entity
+﻿@using UlakNot.Entity
 @model List<UnHashtags>
-
-@{
-    HashtagManager hm = new HashtagManager();
-    List<UnHashtags> list = hm.GetHashtags();
-}
 
 @{
     ViewBag.Title = "Department";
@@ -24,7 +18,7 @@
         <p class="text-center text-muted h5">UlakNot zaman makinesi, zamanın ötesindeki tüm hastagları karşınıza serdi! </p>
         <div class="row mt-5">
             @{
-                foreach (UnHashtags hashtag in list)
+                foreach (UnHashtags hashtag in Model)
                 {
                     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
                         <div class="card">

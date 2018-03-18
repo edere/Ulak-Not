@@ -95,8 +95,10 @@ namespace UlakNot.Web.Controllers
             return View(nm.GetNotes());
         }
 
-        public ActionResult Department(int? id)
+        public ActionResult Department()
         {
+            HashtagManager hm = new HashtagManager();
+
             //if (id == null)
             //{
             //    //todo: 404 hata sayfası gerçekleştir
@@ -110,7 +112,30 @@ namespace UlakNot.Web.Controllers
             //    //todo: 404 sayfası gerçekleştir
             //}
 
-            return View();
+            return View(hm.GetHashtags());
+        }
+
+        public ActionResult SelectDepartment(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            CategoryManager cm = new CategoryManager();
+            UnCategories cat = cm.GetCategoryId(id.Value);
+
+            if (cat == null)
+            {
+                return HttpNotFound();
+            }
+            return View("DepartmentId", cat.Hashtags);
+        }
+
+        public ActionResult DepartmentId()
+        {
+            HashtagManager hm = new HashtagManager();
+            return View(hm.GetHashtags());
         }
 
         public ActionResult HashtagList()
