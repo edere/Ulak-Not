@@ -1132,6 +1132,7 @@
     <Content Include="Assets\css\ionicons.min.css" />
     <Content Include="Assets\css\jquery.mCustomScrollbar.css" />
     <Content Include="Assets\css\jquery.scrollbar.css" />
+    <Content Include="Assets\css\registerok.css" />
     <Content Include="Assets\css\style.css" />
     <Content Include="Assets\css\validation-summary.css" />
     <Content Include="Assets\fonts\fontawesome-webfont.svg" />
@@ -1540,6 +1541,7 @@
     <Content Include="Views\Home\CreateDatabase.cshtml" />
     <Content Include="Views\Home\HashtagList.cshtml" />
     <Content Include="Views\Home\DepartmentId.cshtml" />
+    <Content Include="Views\Home\RegisterOk.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

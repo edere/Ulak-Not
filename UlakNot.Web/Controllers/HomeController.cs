@@ -70,10 +70,15 @@ namespace UlakNot.Web.Controllers
                     return View(model);
                 }
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("RegisterOk");
             }
 
             return View(model);
+        }
+
+        public ActionResult RegisterOk()
+        {
+            return View();
         }
 
         public ActionResult UserAction(Guid g_id)
