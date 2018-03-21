@@ -1,22 +1,27 @@
-﻿
+﻿@using UlakNot.Entity.UserObjects
+@model LoginModel
+
+
 @{
     ViewBag.Title = "Admin Login";
     Layout = "~/Views/Shared/_LayoutAdminLogin.cshtml";
 }
+<link href="~/Assets/Administrator/css/validation-summary.css" rel="stylesheet" />
 
 <div class="login_wrapper">
     <div class="animate form login_form">
         <section class="login_content">
-            <form>
+            <form id="loginForm" method="POST" action="~/Administrator/Login">
                 <h1>Giriş Paneli</h1>
+                @Html.ValidationSummary()
                 <div>
-                    <input type="text" class="form-control" placeholder="Username" required="" />
+                    <input type="text" class="form-control" name="Username" placeholder="Username" />
                 </div>
                 <div>
-                    <input type="password" class="form-control" placeholder="Password" required="" />
+                    <input type="password" class="form-control" name="Password" placeholder="Password" />
                 </div>
                 <div>
-                    <a class="btn btn-default submit" href="index.html">Giriş Yap</a>
+                    <button type="submit" class="btn btn-default btn-block">Giriş Yap</button>
                 </div>
                 <div class="clearfix"></div>
                 <div class="separator">

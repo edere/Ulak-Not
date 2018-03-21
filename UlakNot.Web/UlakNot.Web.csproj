@@ -292,6 +292,17 @@
     <Content Include="Assets\Administrator\bootstrap\js\tooltip.js" />
     <Content Include="Assets\Administrator\bootstrap\js\transition.js" />
     <Content Include="Assets\Administrator\bootstrap\package.js" />
+    <Content Include="Assets\Administrator\build\css\custom.css" />
+    <Content Include="Assets\Administrator\build\css\custom.min.css" />
+    <Content Include="Assets\Administrator\build\images\back_disabled.png" />
+    <Content Include="Assets\Administrator\build\images\back_enabled.png" />
+    <Content Include="Assets\Administrator\build\images\back_enabled_hover.png" />
+    <Content Include="Assets\Administrator\build\images\forward_disabled.png" />
+    <Content Include="Assets\Administrator\build\images\forward_enabled.png" />
+    <Content Include="Assets\Administrator\build\images\forward_enabled_hover.png" />
+    <Content Include="Assets\Administrator\build\images\loading.gif" />
+    <Content Include="Assets\Administrator\build\js\custom.js" />
+    <Content Include="Assets\Administrator\build\js\custom.min.js" />
     <Content Include="Assets\Administrator\Chart.js\dist\Chart.bundle.js" />
     <Content Include="Assets\Administrator\Chart.js\dist\Chart.bundle.min.js" />
     <Content Include="Assets\Administrator\Chart.js\dist\Chart.js" />
@@ -412,6 +423,7 @@
     <Content Include="Assets\Administrator\cropper\src\js\utilities.js" />
     <Content Include="Assets\Administrator\cropper\src\js\variables.js" />
     <Content Include="Assets\Administrator\css\maps\jquery-jvectormap-2.0.3.css" />
+    <Content Include="Assets\Administrator\css\validation-summary.css" />
     <Content Include="Assets\Administrator\datatables.net-bs\css\dataTables.bootstrap.css" />
     <Content Include="Assets\Administrator\datatables.net-bs\css\dataTables.bootstrap.min.css" />
     <Content Include="Assets\Administrator\datatables.net-bs\js\dataTables.bootstrap.js" />
