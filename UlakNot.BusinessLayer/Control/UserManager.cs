@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UlakNot.BusinessLayer.Results;
+using UlakNot.Common.Helpers;
 using UlakNot.DataLayer.EntityFramework;
 using UlakNot.Entity;
 using UlakNot.Entity.UserObjects;
@@ -51,6 +52,13 @@ namespace UlakNot.BusinessLayer.Control
                 {
                     error_res.Result = repo_user.Find(x => x.Username == data.Username && x.Email == data.EMail);
                     // TODO: aktivasyon maili gönder
+
+                    string siteUrl = ConfigReadHelper.Get<string>("SiteRootUri");
+                    string activeUrl = $"{siteUrl}/Home/UserActivate/{error_res.Result.GuidControl}";
+                    string body =
+                        $"Merhaba {error_res.Result.Name} {error_res.Result.Surname} ({error_res.Result.Username}),</br> </br>Hesabınızı etkinleştirmek için <a href='{activeUrl}' target='_blank'>tıklayınız";
+
+                    MailHelper.SendMail(body, error_res.Result.Email, "UlakNot Hesabınızı Aktifleştirin");
                 }
             }
             return error_res;

@@ -81,7 +81,7 @@ namespace UlakNot.Web.Controllers
             return View();
         }
 
-        public ActionResult UserAction(Guid g_id)
+        public ActionResult UserActivate(Guid g_id)
         {
             return View();
         }
