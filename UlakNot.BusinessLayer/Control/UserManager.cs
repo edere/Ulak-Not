@@ -50,6 +50,7 @@ namespace UlakNot.BusinessLayer.Control
                 if (SaveResult > 0)
                 {
                     error_res.Result = repo_user.Find(x => x.Username == data.Username && x.Email == data.EMail);
+                    // TODO: aktivasyon maili gönder
                 }
             }
             return error_res;

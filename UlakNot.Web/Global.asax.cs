@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using UlakNot.Common;
+using UlakNot.Web.Start;
 
 namespace UlakNot.Web
 {
@@ -13,6 +15,7 @@ namespace UlakNot.Web
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            App.Common = new WebCommon();
         }
     }
 }

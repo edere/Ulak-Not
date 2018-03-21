@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App.cs" />
+    <Compile Include="DefaultCommon.cs" />
     <Compile Include="ICommon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

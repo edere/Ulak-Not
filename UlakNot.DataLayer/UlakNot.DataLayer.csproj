@@ -59,6 +59,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\UlakNot.Common\UlakNot.Common.csproj">
+      <Project>{22539214-11d4-4d40-8f5f-fcbde2bbbf3e}</Project>
+      <Name>UlakNot.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UlakNot.Core\UlakNot.Core.csproj">
       <Project>{738ab099-f450-4835-8030-3e9d95f000ee}</Project>
       <Name>UlakNot.Core</Name>
