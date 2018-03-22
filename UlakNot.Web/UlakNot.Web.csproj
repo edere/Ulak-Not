@@ -1555,6 +1555,7 @@
     <Content Include="Views\Home\HashtagList.cshtml" />
     <Content Include="Views\Home\DepartmentId.cshtml" />
     <Content Include="Views\Home\RegisterOk.cshtml" />
+    <Content Include="Views\Home\UserActivateOk.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
