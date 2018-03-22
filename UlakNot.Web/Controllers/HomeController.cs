@@ -89,7 +89,7 @@ namespace UlakNot.Web.Controllers
             if (user.Error.Count > 0)
             {
                 TempData["errors"] = user.Error;
-                return RedirectToAction("Login");
+                return RedirectToAction("UserActivateError");
             }
 
             return RedirectToAction("UserActivateOk");
@@ -98,6 +98,16 @@ namespace UlakNot.Web.Controllers
         public ActionResult UserActivateOk(Guid id)
         {
             return View();
+        }
+
+        public ActionResult UserActivateError()
+        {
+            List<string> errors = null;
+            if (TempData["errors"] != null)
+            {
+                errors = TempData["errors"] as List<string>;
+            }
+            return View(errors);
         }
 
         public ActionResult PasswordReset()

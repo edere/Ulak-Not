@@ -1,0 +1,48 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Geçersiz İşlem</title>
+    <link href="~/Assets/css/registerok.css" rel="stylesheet" />
+    <link href="~/Assets/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Assets/js/bootstrap.min.js"></script>
+    <script src="~/Assets/js/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+
+    <section class="login-info">
+        <div class="container">
+            <div class="row main">
+                <div class="form-header">
+                    <h1 class="text-center">Yönlendiriliyorsunuz...</h1>
+                </div>
+                <div class="main-content">
+                    <div class="text-success">
+                        <h2><span class="glyphicon glyphicon-ok-circle"></span>&nbsp;&nbsp;&nbsp;Geçersiz İşlem!</h2>
+                        <hr />
+                        <p class="text-justify">
+                            Giriş sayfasına yönlendiriliyorsunuz!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+
+        $(function () {
+            setTimeout(function () {
+                window.location = "/Home/Login";
+
+            },
+                5000);
+        });
+    </script>
+</body>
+</html>
