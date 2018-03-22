@@ -81,7 +81,21 @@ namespace UlakNot.Web.Controllers
             return View();
         }
 
-        public ActionResult UserActivate(Guid g_id)
+        public ActionResult UserActivate(Guid id)
+        {
+            UserManager um = new UserManager();
+            ErrorResult<UnUsers> user = um.ActivateUser(id);
+
+            if (user.Error.Count > 0)
+            {
+                TempData["errors"] = user.Error;
+                return RedirectToAction("Login");
+            }
+
+            return RedirectToAction("UserActivateOk");
+        }
+
+        public ActionResult UserActivateOk(Guid id)
         {
             return View();
         }

@@ -64,6 +64,30 @@ namespace UlakNot.BusinessLayer.Control
             return error_res;
         }
 
+        public ErrorResult<UnUsers> ActivateUser(Guid activateId)
+        {
+            ErrorResult<UnUsers> res = new ErrorResult<UnUsers>();
+            res.Result = repo_user.Find(x => x.GuidControl == activateId);
+
+            if (res.Result != null)
+            {
+                if (res.Result.ActiveStatus)
+                {
+                    res.Error.Add("Kullanıcı adı daha önce aktif edilmiştir.");
+                    return res;
+                }
+
+                res.Result.ActiveStatus = true;
+                repo_user.Update(res.Result);
+            }
+            else
+            {
+                res.Error.Add("Geçersiz kullanıcı doğrulaması!");
+            }
+
+            return res;
+        }
+
         public ErrorResult<UnUsers> LoginUser(LoginModel data)
         {
             ErrorResult<UnUsers> errorRes = new ErrorResult<UnUsers>();
