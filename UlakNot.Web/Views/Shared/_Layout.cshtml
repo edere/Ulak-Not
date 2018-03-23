@@ -1,4 +1,20 @@
-﻿<!DOCTYPE html>
+﻿@using UlakNot.Entity
+@{
+    UnUsers user = null;
+
+    if (Session["login"] == null)
+    {
+        Response.Redirect("/Home/Login");
+    }
+
+    else
+    {
+        user = Session["login"] as UnUsers;
+    }
+}
+
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -24,7 +40,11 @@
 </head>
 <body>
 
-    <!-- Header
+@if (user != null)
+{
+
+
+<!-- Header
     ================================================= -->
     <header id="header">
         <nav class="navbar navbar-default navbar-fixed-top menu">
@@ -78,7 +98,7 @@
                     <div class="col-md-3 static">
                         <div class="profile-card">
                             <img src="http://placehold.it/300x300" alt="user" class="profile-photo" />
-                            <h5><a href="timeline.html" class="text-white">İlhan Mansız</a></h5>
+                            <h5><a href="timeline.html" class="text-white">@(user.Name + " " + user.Surname) </a></h5>
                             <a href="#" class="text-white"><i class="ion ion-android-person-add"></i> 1903 Not</a>
                         </div><!--profile card ends-->
 
@@ -216,7 +236,11 @@
             })
         })
     </script>
-
+}
+@if (user == null)
+{
+    <meta http-equiv="refresh" content="0;URL=/Home/Login">
+}
     @RenderSection("scripts", false)
 </body>
 </html>
