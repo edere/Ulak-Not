@@ -1562,6 +1562,7 @@
     <Content Include="Views\Home\UserActivateOk.cshtml" />
     <Content Include="Views\Home\UserActivateError.cshtml" />
     <Content Include="Views\Home\MyProfile.cshtml" />
+    <Content Include="Views\Home\EditProfile.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

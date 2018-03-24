@@ -98,6 +98,11 @@ namespace UlakNot.Web.Controllers
             return View(res.Result);
         }
 
+        public ActionResult EditProfile()
+        {
+            return View();
+        }
+
         public ActionResult UserActivate(Guid id)
         {
             UserManager um = new UserManager();

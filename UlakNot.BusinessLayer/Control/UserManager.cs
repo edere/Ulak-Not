@@ -41,6 +41,7 @@ namespace UlakNot.BusinessLayer.Control
                     Name = data.Name,
                     Surname = data.Surname,
                     Password = data.Password,
+                    ImageName = "noprofilepicture.jpg",
                     GuidControl = Guid.NewGuid(),
                     ActiveStatus = false,
                     AdminAuthority = false,
