@@ -64,6 +64,18 @@ namespace UlakNot.BusinessLayer.Control
             return error_res;
         }
 
+        public ErrorResult<UnUsers> GetUserById(int id)
+        {
+            ErrorResult<UnUsers> res = new ErrorResult<UnUsers>();
+            res.Result = repo_user.Find(x => x.Id == id);
+            if (res.Result == null)
+            {
+                res.Error.Add("Kullanıcı Bulunamadı");
+            }
+
+            return res;
+        }
+
         public ErrorResult<UnUsers> ActivateUser(Guid activateId)
         {
             ErrorResult<UnUsers> res = new ErrorResult<UnUsers>();

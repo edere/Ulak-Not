@@ -1144,6 +1144,7 @@
     <Content Include="Assets\css\ionicons.min.css" />
     <Content Include="Assets\css\jquery.mCustomScrollbar.css" />
     <Content Include="Assets\css\jquery.scrollbar.css" />
+    <Content Include="Assets\css\myprofile.css" />
     <Content Include="Assets\css\registerok.css" />
     <Content Include="Assets\css\style.css" />
     <Content Include="Assets\css\validation-summary.css" />
@@ -1162,6 +1163,7 @@
     <Content Include="Assets\js\jquery.scrollbar.min.js" />
     <Content Include="Assets\js\jquery.sticky-kit.min.js" />
     <Content Include="Assets\js\masonry.pkgd.min.js" />
+    <Content Include="Assets\js\myprofile.js" />
     <Content Include="Assets\js\npm.js" />
     <Content Include="Assets\js\script.js" />
     <Content Include="Assets\js\YorumAutosize.js" />
@@ -1169,7 +1171,9 @@
     <Content Include="Assets\validator\validator.js" />
     <Content Include="Assets\validator\validator.min.js" />
     <Content Include="Global.asax" />
+    <Content Include="Images\hbkocabiyik.jpg" />
     <Content Include="index.html" />
+    <Content Include="Images\noprofilepicture.jpg" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1557,6 +1561,7 @@
     <Content Include="Views\Home\RegisterOk.cshtml" />
     <Content Include="Views\Home\UserActivateOk.cshtml" />
     <Content Include="Views\Home\UserActivateError.cshtml" />
+    <Content Include="Views\Home\MyProfile.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

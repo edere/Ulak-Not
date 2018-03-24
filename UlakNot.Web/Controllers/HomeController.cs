@@ -81,6 +81,23 @@ namespace UlakNot.Web.Controllers
             return View();
         }
 
+        public ActionResult MyProfile()
+        {
+            UnUsers currentUser = Session["Login"] as UnUsers;
+            if (currentUser == null)
+            {
+                return RedirectToAction("Login");
+            }
+            UserManager um = new UserManager();
+            ErrorResult<UnUsers> res = um.GetUserById(currentUser.Id);
+            if (res.Error.Count > 0)
+            {
+                return RedirectToAction("Login");
+            }
+
+            return View(res.Result);
+        }
+
         public ActionResult UserActivate(Guid id)
         {
             UserManager um = new UserManager();
