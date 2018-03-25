@@ -115,6 +115,31 @@ namespace UlakNot.Web.Controllers
             return View(res.Result);
         }
 
+        [HttpPost]
+        public ActionResult EditProfile(UnUsers user, HttpPostedFileBase ImageName)
+        {
+            if (ImageName != null &&
+                (ImageName.ContentType == "image/jpeg" ||
+                 ImageName.ContentType == "image/png" ||
+                 ImageName.ContentType == "image/jpg"))
+            {
+                string filename = $"user_{user.Id}.{ImageName.ContentType.Split('/')[1]}";
+                ImageName.SaveAs(Server.MapPath($"~/images/{filename}"));
+                user.ImageName = filename;
+            }
+
+            UserManager um = new UserManager();
+            ErrorResult<UnUsers> res = um.UpdateProfile(user);
+
+            if (res.Error.Count > 0)
+            {
+                return RedirectToAction("Login");
+            }
+
+            Session["Login"] = res.Result;
+            return RedirectToAction("MyProfile");
+        }
+
         public ActionResult UserActivate(Guid id)
         {
             UserManager um = new UserManager();

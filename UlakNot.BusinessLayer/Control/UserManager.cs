@@ -120,5 +120,49 @@ namespace UlakNot.BusinessLayer.Control
 
             return errorRes;
         }
+
+        public ErrorResult<UnUsers> UpdateProfile(UnUsers data)
+        {
+            UnUsers u_user = repo_user.Find(x => x.Username == data.Username || x.Email == data.Email);
+            ErrorResult<UnUsers> res = new ErrorResult<UnUsers>();
+
+            if (u_user != null && u_user.Id != data.Id)
+            {
+                if (u_user.Username == data.Username)
+                {
+                    res.Error.Add("Kullanıcı adı kullanılıyor");
+                }
+
+                if (u_user.Email == data.Email)
+                {
+                    res.Error.Add("E-posta adresi kullanılıyor");
+                }
+
+                return res;
+            }
+
+            res.Result = repo_user.Find(x => x.Id == data.Id);
+            res.Result.Department = data.Department;
+            res.Result.Email = data.Email;
+            res.Result.Name = data.Name;
+            res.Result.Surname = data.Surname;
+            res.Result.Password = data.Password;
+            res.Result.University = data.University;
+            res.Result.Username = data.Username;
+            res.Result.DateOfBirth = data.DateOfBirth;
+            res.Result.Gender = data.Gender;
+
+            if (string.IsNullOrEmpty(data.ImageName) == false)
+            {
+                res.Result.ImageName = data.ImageName;
+            }
+
+            if (repo_user.Update(res.Result) == 0)
+            {
+                res.Error.Add("Profil Güncellenemedi");
+            }
+
+            return res;
+        }
     }
 }
