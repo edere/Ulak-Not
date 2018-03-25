@@ -100,7 +100,19 @@ namespace UlakNot.Web.Controllers
 
         public ActionResult EditProfile()
         {
-            return View();
+            UnUsers currentUser = Session["Login"] as UnUsers;
+            if (currentUser == null)
+            {
+                return RedirectToAction("Login");
+            }
+            UserManager um = new UserManager();
+            ErrorResult<UnUsers> res = um.GetUserById(currentUser.Id);
+            if (res.Error.Count > 0)
+            {
+                return RedirectToAction("Login");
+            }
+
+            return View(res.Result);
         }
 
         public ActionResult UserActivate(Guid id)
