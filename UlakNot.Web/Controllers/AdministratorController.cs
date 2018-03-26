@@ -39,6 +39,12 @@ namespace UlakNot.Web.Controllers
             return View(model);
         }
 
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            return RedirectToAction("Login");
+        }
+
         public ActionResult Index()
         {
             return View();
