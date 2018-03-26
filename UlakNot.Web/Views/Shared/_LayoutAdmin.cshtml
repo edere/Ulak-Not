@@ -1,4 +1,20 @@
-﻿<!DOCTYPE html>
+﻿@using UlakNot.Entity
+@{
+    UnUsers user = null;
+
+    if (Session["login"] == null)
+    {
+        Response.Redirect("/Administrator/Login");
+    }
+
+    else
+    {
+        user = Session["login"] as UnUsers;
+    }
+}
+
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -39,7 +55,7 @@
                             <div class="row">
                                 <div class="profile_info">
                                     <span>Hoşgeldiniz,</span>
-                                    <h2>Admin Adı</h2>
+                                    <h2>@user.Name</h2>
                                 </div>
                             </div>
                             </center>
@@ -109,7 +125,7 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li class="">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="images/img.jpg" alt="">Admin Adı
+                                    <img src="images/img.jpg" alt="">@(user.Name + " " + user.Surname)
                                     <span class=" fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -120,7 +136,7 @@
                                             <span>Ayarlar</span>
                                         </a>
                                     </li>
-                                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i>Çıkış Yap</a></li>
+                                    <li><a href="/Administrator/Logout"><i class="fa fa-sign-out pull-right"></i>Çıkış Yap</a></li>
                                 </ul>
                             </li>
                             <li role="presentation" class="dropdown">
