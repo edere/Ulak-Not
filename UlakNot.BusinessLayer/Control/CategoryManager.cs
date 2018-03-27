@@ -3,23 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UlakNot.BusinessLayer.Abstract;
 using UlakNot.DataLayer.EntityFramework;
 using UlakNot.Entity;
 
 namespace UlakNot.BusinessLayer.Control
 {
-    public class CategoryManager
+    public class CategoryManager : ManagerBase<UnCategories>
     {
-        private Repository<UnCategories> repo_cat = new Repository<UnCategories>();
-
-        public List<UnCategories> GetCategories()
-        {
-            return repo_cat.List();
-        }
-
-        public UnCategories GetCategoryId(int id)
-        {
-            return repo_cat.Find(x => x.Id == id);
-        }
     }
 }

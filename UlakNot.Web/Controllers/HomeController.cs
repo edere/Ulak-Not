@@ -13,6 +13,11 @@ namespace UlakNot.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private NoteManager noteManager = new NoteManager();
+        private CategoryManager categoryManager = new CategoryManager();
+        private HashtagManager hashtagManager = new HashtagManager();
+        private UserManager userManager = new UserManager();
+
         public ActionResult CreateDatabase()
         {
             BusinessLayer.CreateDatabase dbc = new BusinessLayer.CreateDatabase();
@@ -29,8 +34,7 @@ namespace UlakNot.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                UserManager um = new UserManager();
-                ErrorResult<UnUsers> res = um.LoginUser(model);
+                ErrorResult<UnUsers> res = userManager.LoginUser(model);
 
                 if (res.Error.Count > 0)
                 {
@@ -61,8 +65,7 @@ namespace UlakNot.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                UserManager um = new UserManager();
-                ErrorResult<UnUsers> res = um.RegisterUser(model);
+                ErrorResult<UnUsers> res = userManager.RegisterUser(model);
 
                 if (res.Error.Count > 0)
                 {
@@ -88,8 +91,8 @@ namespace UlakNot.Web.Controllers
             {
                 return RedirectToAction("Login");
             }
-            UserManager um = new UserManager();
-            ErrorResult<UnUsers> res = um.GetUserById(currentUser.Id);
+
+            ErrorResult<UnUsers> res = userManager.GetUserById(currentUser.Id);
             if (res.Error.Count > 0)
             {
                 return RedirectToAction("Login");
@@ -105,8 +108,8 @@ namespace UlakNot.Web.Controllers
             {
                 return RedirectToAction("Login");
             }
-            UserManager um = new UserManager();
-            ErrorResult<UnUsers> res = um.GetUserById(currentUser.Id);
+
+            ErrorResult<UnUsers> res = userManager.GetUserById(currentUser.Id);
             if (res.Error.Count > 0)
             {
                 return RedirectToAction("Login");
@@ -128,8 +131,7 @@ namespace UlakNot.Web.Controllers
                 user.ImageName = filename;
             }
 
-            UserManager um = new UserManager();
-            ErrorResult<UnUsers> res = um.UpdateProfile(user);
+            ErrorResult<UnUsers> res = userManager.UpdateProfile(user);
 
             if (res.Error.Count > 0)
             {
@@ -142,8 +144,7 @@ namespace UlakNot.Web.Controllers
 
         public ActionResult UserActivate(Guid id)
         {
-            UserManager um = new UserManager();
-            ErrorResult<UnUsers> user = um.ActivateUser(id);
+            ErrorResult<UnUsers> user = userManager.ActivateUser(id);
 
             if (user.Error.Count > 0)
             {
@@ -177,16 +178,12 @@ namespace UlakNot.Web.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            NoteManager nm = new NoteManager();
-
             //BusinessLayer.CreateDatabase dbc = new BusinessLayer.CreateDatabase();
-            return View(nm.GetNotes().OrderByDescending(x => x.CreatedDate).ToList());
+            return View(noteManager.ListQueryable().OrderByDescending(x => x.CreatedDate).ToList());
         }
 
         public ActionResult Department()
         {
-            HashtagManager hm = new HashtagManager();
-
             //if (id == null)
             //{
             //    //todo: 404 hata sayfası gerçekleştir
@@ -200,7 +197,7 @@ namespace UlakNot.Web.Controllers
             //    //todo: 404 sayfası gerçekleştir
             //}
 
-            return View(hm.GetHashtags());
+            return View(hashtagManager.List());
         }
 
         public ActionResult SelectDepartment(int? id)
@@ -210,8 +207,7 @@ namespace UlakNot.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            CategoryManager cm = new CategoryManager();
-            UnCategories cat = cm.GetCategoryId(id.Value);
+            UnCategories cat = categoryManager.Find(x => x.Id == id.Value);
 
             if (cat == null)
             {
@@ -222,8 +218,7 @@ namespace UlakNot.Web.Controllers
 
         public ActionResult DepartmentId()
         {
-            HashtagManager hm = new HashtagManager();
-            return View(hm.GetHashtags());
+            return View(hashtagManager.List());
         }
 
         public ActionResult HashtagList()
@@ -238,8 +233,7 @@ namespace UlakNot.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            HashtagManager hm = new HashtagManager();
-            UnHashtags hash = hm.HashtagId(id.Value);
+            UnHashtags hash = hashtagManager.Find(x => x.Id == id.Value);
 
             if (hash == null)
             {

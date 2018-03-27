@@ -3,23 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UlakNot.BusinessLayer.Abstract;
 using UlakNot.DataLayer.EntityFramework;
 using UlakNot.Entity;
 
 namespace UlakNot.BusinessLayer.Control
 {
-    public class HashtagManager
+    public class HashtagManager : ManagerBase<UnHashtags>
     {
-        private Repository<UnHashtags> repo_hashtags = new Repository<UnHashtags>();
-
-        public List<UnHashtags> GetHashtags()
-        {
-            return repo_hashtags.List();
-        }
-
-        public UnHashtags HashtagId(int id)
-        {
-            return repo_hashtags.Find(x => x.Id == id);
-        }
     }
 }

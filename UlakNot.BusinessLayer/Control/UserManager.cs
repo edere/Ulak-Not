@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UlakNot.BusinessLayer.Abstract;
 using UlakNot.BusinessLayer.Results;
 using UlakNot.Common.Helpers;
 using UlakNot.DataLayer.EntityFramework;
@@ -11,14 +12,12 @@ using UlakNot.Entity.UserObjects;
 
 namespace UlakNot.BusinessLayer.Control
 {
-    public class UserManager
+    public class UserManager : ManagerBase<UnUsers>
     {
-        private Repository<UnUsers> repo_user = new Repository<UnUsers>();
-
         public ErrorResult<UnUsers> RegisterUser(RegisterModel data)
         {
             ErrorResult<UnUsers> error_res = new ErrorResult<UnUsers>();
-            UnUsers user = repo_user.Find(x => x.Username == data.Username || x.Email == data.EMail);
+            UnUsers user = Find(x => x.Username == data.Username || x.Email == data.EMail);
 
             if (user != null)
             {
@@ -34,7 +33,7 @@ namespace UlakNot.BusinessLayer.Control
             }
             else
             {
-                int SaveResult = repo_user.Insert(new UnUsers()
+                int SaveResult = Insert(new UnUsers()
                 {
                     Username = data.Username,
                     Email = data.EMail,
@@ -51,7 +50,7 @@ namespace UlakNot.BusinessLayer.Control
 
                 if (SaveResult > 0)
                 {
-                    error_res.Result = repo_user.Find(x => x.Username == data.Username && x.Email == data.EMail);
+                    error_res.Result = Find(x => x.Username == data.Username && x.Email == data.EMail);
                     // TODO: aktivasyon maili gönder
 
                     string siteUrl = ConfigReadHelper.Get<string>("SiteRootUri");
@@ -68,7 +67,7 @@ namespace UlakNot.BusinessLayer.Control
         public ErrorResult<UnUsers> GetUserById(int id)
         {
             ErrorResult<UnUsers> res = new ErrorResult<UnUsers>();
-            res.Result = repo_user.Find(x => x.Id == id);
+            res.Result = Find(x => x.Id == id);
             if (res.Result == null)
             {
                 res.Error.Add("Kullanıcı Bulunamadı");
@@ -80,7 +79,7 @@ namespace UlakNot.BusinessLayer.Control
         public ErrorResult<UnUsers> ActivateUser(Guid activateId)
         {
             ErrorResult<UnUsers> res = new ErrorResult<UnUsers>();
-            res.Result = repo_user.Find(x => x.GuidControl == activateId);
+            res.Result = Find(x => x.GuidControl == activateId);
 
             if (res.Result != null)
             {
@@ -91,7 +90,7 @@ namespace UlakNot.BusinessLayer.Control
                 }
 
                 res.Result.ActiveStatus = true;
-                repo_user.Update(res.Result);
+                Update(res.Result);
             }
             else
             {
@@ -104,7 +103,7 @@ namespace UlakNot.BusinessLayer.Control
         public ErrorResult<UnUsers> LoginUser(LoginModel data)
         {
             ErrorResult<UnUsers> errorRes = new ErrorResult<UnUsers>();
-            errorRes.Result = repo_user.Find(x => x.Username == data.Username && x.Password == data.Password);
+            errorRes.Result = Find(x => x.Username == data.Username && x.Password == data.Password);
 
             if (errorRes.Result != null)
             {
@@ -123,7 +122,7 @@ namespace UlakNot.BusinessLayer.Control
 
         public ErrorResult<UnUsers> UpdateProfile(UnUsers data)
         {
-            UnUsers u_user = repo_user.Find(x => x.Username == data.Username || x.Email == data.Email);
+            UnUsers u_user = Find(x => x.Username == data.Username || x.Email == data.Email);
             ErrorResult<UnUsers> res = new ErrorResult<UnUsers>();
 
             if (u_user != null && u_user.Id != data.Id)
@@ -141,7 +140,7 @@ namespace UlakNot.BusinessLayer.Control
                 return res;
             }
 
-            res.Result = repo_user.Find(x => x.Id == data.Id);
+            res.Result = Find(x => x.Id == data.Id);
             res.Result.Department = data.Department;
             res.Result.Email = data.Email;
             res.Result.Name = data.Name;
@@ -157,7 +156,7 @@ namespace UlakNot.BusinessLayer.Control
                 res.Result.ImageName = data.ImageName;
             }
 
-            if (repo_user.Update(res.Result) == 0)
+            if (Update(res.Result) == 0)
             {
                 res.Error.Add("Profil Güncellenemedi");
             }
