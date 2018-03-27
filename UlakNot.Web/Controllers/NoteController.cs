@@ -8,126 +8,129 @@ using System.Web;
 using System.Web.Mvc;
 using UlakNot.BusinessLayer.Control;
 using UlakNot.Entity;
+using UlakNot.Web.Models;
 
 namespace UlakNot.Web.Controllers
 {
     public class NoteController : Controller
     {
         private NoteManager noteManager = new NoteManager();
+        private HashtagManager hastagManager = new HashtagManager();
 
         // Kendi Notlarını Göster
         public ActionResult Index()
         {
-            var unNotes = db.UnNotes.Include(u => u.Hashtags);
-            return View(unNotes.ToList());
+            var notes = noteManager.ListQueryable().Include("Hashtags").Include("Owner")
+                .Where(x => x.Owner.Id == SessionManager.User.Id).OrderByDescending(x => x.Id);
+            return View(notes.ToList());
         }
 
-        // GET: Note/Details/5
+        // Not Detay Görüntüleme
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UnNotes unNotes = db.UnNotes.Find(id);
-            if (unNotes == null)
+
+            UnNotes notes = noteManager.Find(x => x.Id == id);
+            if (notes == null)
             {
                 return HttpNotFound();
             }
-            return View(unNotes);
+            return View(notes);
         }
 
-        // GET: Note/Create
+        // Not oluşturulurken hashtag'de seçildiğinden hashtag bilgileri dolduruluyor(combobox vs'ye doldur)
         public ActionResult Create()
         {
-            ViewBag.HashtagsId = new SelectList(db.UnHashtags, "Id", "Code");
+            ViewBag.HashtagsId = new SelectList(hastagManager.List(), "Id", "Code");
             return View();
         }
 
-        // POST: Note/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // Not Insert İşlemi Yapılıyor.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,Text,Draft,LikeTotal,HashtagsId,UpdatedUserName,CreatedDate,UpdatedDate")] UnNotes unNotes)
+        public ActionResult Create(UnNotes notes)
         {
+            ModelState.Remove("UpdatedDate");
+            ModelState.Remove("CreatedDate");
+            ModelState.Remove("UpdatedUserName");
             if (ModelState.IsValid)
             {
-                db.UnNotes.Add(unNotes);
-                db.SaveChanges();
+                noteManager.Insert(notes);
                 return RedirectToAction("Index");
             }
 
-            ViewBag.HashtagsId = new SelectList(db.UnHashtags, "Id", "Code", unNotes.HashtagsId);
-            return View(unNotes);
+            ViewBag.HashtagsId = new SelectList(hastagManager.List(), "Id", "Code", notes.HashtagsId);
+            return View(notes);
         }
 
-        // GET: Note/Edit/5
+        // Not düzenleme işlemi(notun gösterildiği sayfaya gönderildiği aşama)
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UnNotes unNotes = db.UnNotes.Find(id);
-            if (unNotes == null)
+
+            UnNotes notes = noteManager.Find(x => x.Id == id);
+            if (notes == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.HashtagsId = new SelectList(db.UnHashtags, "Id", "Code", unNotes.HashtagsId);
-            return View(unNotes);
+            ViewBag.HashtagsId = new SelectList(hastagManager.List(), "Id", "Code", notes.HashtagsId);
+            return View(notes);
         }
 
-        // POST: Note/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // Not düzenleme Post işlemi
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,Text,Draft,LikeTotal,HashtagsId,UpdatedUserName,CreatedDate,UpdatedDate")] UnNotes unNotes)
+        public ActionResult Edit(UnNotes notes)
         {
+            ModelState.Remove("UpdatedDate");
+            ModelState.Remove("CreatedDate");
+            ModelState.Remove("UpdatedUserName");
             if (ModelState.IsValid)
             {
-                db.Entry(unNotes).State = EntityState.Modified;
-                db.SaveChanges();
+                UnNotes unote = noteManager.Find(x => x.Id == notes.Id);
+                unote.Draft = notes.Draft;
+                unote.HashtagsId = notes.HashtagsId;
+                unote.Text = notes.Text;
+                unote.Title = notes.Title;
+
+                noteManager.Update(unote);
+
                 return RedirectToAction("Index");
             }
-            ViewBag.HashtagsId = new SelectList(db.UnHashtags, "Id", "Code", unNotes.HashtagsId);
-            return View(unNotes);
+            ViewBag.HashtagsId = new SelectList(hastagManager.List(), "Id", "Code", notes.HashtagsId);
+            return View(notes);
         }
 
-        // GET: Note/Delete/5
+        // Silinecek kayıt gösterimi
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UnNotes unNotes = db.UnNotes.Find(id);
-            if (unNotes == null)
+
+            UnNotes notes = noteManager.Find(x => x.Id == id);
+            if (notes == null)
             {
                 return HttpNotFound();
             }
-            return View(unNotes);
+            return View(notes);
         }
 
-        // POST: Note/Delete/5
+        // Not silme işlemi
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            UnNotes unNotes = db.UnNotes.Find(id);
-            db.UnNotes.Remove(unNotes);
-            db.SaveChanges();
+            UnNotes notes = noteManager.Find(x => x.Id == id);
+            noteManager.Delete(notes);
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

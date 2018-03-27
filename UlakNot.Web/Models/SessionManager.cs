@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using UlakNot.Entity;
 
-namespace UlakNot.Web.System
+namespace UlakNot.Web.Models
 {
     public class SessionManager
     {
