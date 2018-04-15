@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -8,6 +9,7 @@ using UlakNot.BusinessLayer.Control;
 using UlakNot.BusinessLayer.Results;
 using UlakNot.Entity;
 using UlakNot.Entity.UserObjects;
+using UlakNot.Web.Models;
 
 namespace UlakNot.Web.Controllers
 {
@@ -84,7 +86,7 @@ namespace UlakNot.Web.Controllers
             return View();
         }
 
-        public ActionResult MyProfile()
+        public ActionResult Settings()
         {
             UnUsers currentUser = Session["Login"] as UnUsers;
             if (currentUser == null)
@@ -99,6 +101,15 @@ namespace UlakNot.Web.Controllers
             }
 
             return View(res.Result);
+        }
+
+        public ActionResult MyProfile()
+        {
+            var notes = noteManager.ListQueryable().Include("Hashtags").Include("Owner").Where(
+                x => x.Owner.Id == SessionManager.User.Id).OrderByDescending(
+                x => x.CreatedDate);
+
+            return View(notes.ToList());
         }
 
         public ActionResult EditProfile()
