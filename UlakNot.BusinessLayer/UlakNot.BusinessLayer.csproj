@@ -52,6 +52,7 @@
     <Compile Include="Abstract\ManagerBase.cs" />
     <Compile Include="Control\CategoryManager.cs" />
     <Compile Include="Control\HashtagManager.cs" />
+    <Compile Include="Control\LikedManager.cs" />
     <Compile Include="Control\NoteManager.cs" />
     <Compile Include="Control\UserManager.cs" />
     <Compile Include="CreateDatabase.cs" />
