@@ -245,5 +245,10 @@ namespace UlakNot.Web.Controllers
                 return Json(new { result = new List<int>() });
             }
         }
+
+        public ActionResult MostInTheBag()
+        {
+            return View(noteManager.ListQueryable().OrderByDescending(x => x.LikeTotal).ToList());
+        }
     }
 }
