@@ -16,6 +16,7 @@ namespace UlakNot.Web.Controllers
     {
         private NoteManager noteManager = new NoteManager();
         private HashtagManager hastagManager = new HashtagManager();
+        private LikedManager likedManager = new LikedManager();
 
         // Kendi Notlarını Göster
         public ActionResult Index()
@@ -132,6 +133,95 @@ namespace UlakNot.Web.Controllers
             UnNotes notes = noteManager.Find(x => x.Id == id);
             noteManager.Delete(notes);
             return RedirectToAction("Index");
+        }
+
+        public ActionResult MyLikedNotes()
+        {
+            var notes = likedManager.ListQueryable().Include("LikedUser").Include("Note").Where(
+                x => x.LikedUser.Id == SessionManager.User.Id).Select(
+                x => x.Note).Include("Category").Include("Owner").OrderByDescending(
+                x => x.CreatedDate);
+
+            return View("Index", notes.ToList());
+        }
+
+        [HttpPost]
+        public ActionResult GetLiked(int[] ids)
+        {
+            if (SessionManager.User != null)
+            {
+                List<int> likedNoteIds = likedManager.List(
+                    x => x.LikedUser.Id == SessionManager.User.Id && ids.Contains(x.Note.Id)).Select(
+                    x => x.Note.Id).ToList();
+
+                return Json(new { result = likedNoteIds });
+            }
+            else
+            {
+                return Json(new { result = new List<int>() });
+            }
+        }
+
+        [HttpPost]
+        public ActionResult SetLikeState(int noteid, bool liked)
+        {
+            int res = 0;
+
+            if (SessionManager.User == null)
+                return Json(new { hasError = true, errorMessage = "Giriş yapmış kullanıcılar not beğenebilir!", result = 0 });
+
+            UnLike like =
+                likedManager.Find(x => x.Note.Id == noteid && x.LikedUser.Id == SessionManager.User.Id);
+
+            UnNotes note = noteManager.Find(x => x.Id == noteid);
+
+            if (like != null && liked == false)
+            {
+                res = likedManager.Delete(like);
+            }
+            else if (like == null && liked == true)
+            {
+                res = likedManager.Insert(new UnLike()
+                {
+                    LikedUser = SessionManager.User,
+                    Note = note
+                });
+            }
+
+            if (res > 0)
+            {
+                if (liked)
+                {
+                    note.LikeTotal++;
+                }
+                else
+                {
+                    note.LikeTotal--;
+                }
+
+                res = noteManager.Update(note);
+
+                return Json(new { hasError = false, errorMessage = string.Empty, result = note.LikeTotal });
+            }
+
+            return Json(new { hasError = true, errorMessage = "Beğenme işlemi gerçekleştirilemedi.", result = note.LikeTotal });
+        }
+
+        public ActionResult GetNoteText(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            UnNotes note = noteManager.Find(x => x.Id == id);
+
+            if (note == null)
+            {
+                return HttpNotFound();
+            }
+
+            return PartialView("_PartialNoteText", note);
         }
     }
 }

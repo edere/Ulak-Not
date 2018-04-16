@@ -15,11 +15,11 @@
                 var id = data.result[i];
                 var likedNote = $("div[data-note-id=" + id + "]");
                 var btn = likedNote.find("button[data-liked]");
-                var span = btn.find("span.like-star");
+                var span = btn.find("span.icon");
 
                 btn.data("liked", true);
-                span.removeClass("glyphicon-star-empty");
-                span.addClass("glyphicon-star");
+                span.removeClass("fa-thumbs-o-up");
+                span.addClass("fa-thumbs-up");
             }
         }
     }).fail(function () {
@@ -29,7 +29,7 @@
         var btn = $(this);
         var liked = btn.data("liked");
         var noteid = btn.data("note-id");
-        var spanStar = btn.find("span.like-star");
+        var spanStar = btn.find("span.icon");
         var spanCount = btn.find("span.like-count");
 
         console.log(liked);
@@ -51,13 +51,13 @@
 
                 console.log("like count(after) : " + spanCount.text());
 
-                spanStar.removeClass("glyphicon-star-empty");
-                spanStar.removeClass("glyphicon-star");
+                spanStar.removeClass("fa-thumbs-o-up");
+                spanStar.removeClass("fa-thumbs-up");
 
                 if (liked) {
-                    spanStar.addClass("glyphicon-star");
+                    spanStar.addClass("fa-thumbs-up");
                 } else {
-                    spanStar.addClass("glyphicon-star-empty");
+                    spanStar.addClass("fa-thumbs-o-up");
                 }
             }
         }).fail(function () {

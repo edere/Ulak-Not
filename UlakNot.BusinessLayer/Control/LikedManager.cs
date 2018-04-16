@@ -9,7 +9,7 @@ using UlakNot.Entity;
 
 namespace UlakNot.BusinessLayer.Control
 {
-    internal class LikedManager : ManagerBase<UnLike>
+    public class LikedManager : ManagerBase<UnLike>
     {
     }
 }
