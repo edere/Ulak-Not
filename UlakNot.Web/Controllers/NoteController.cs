@@ -228,5 +228,22 @@ namespace UlakNot.Web.Controllers
 
             return PartialView("_PartialNoteText", note);
         }
+
+        [HttpPost]
+        public ActionResult GetBag(int[] id_bag)
+        {
+            if (SessionManager.User != null)
+            {
+                List<int> BagNoteIds = likedManager.List(
+                    x => x.LikedUser.Id == SessionManager.User.Id && id_bag.Contains(x.Note.Id)).Select(
+                    x => x.Note.Id).ToList();
+
+                return Json(new { result = BagNoteIds });
+            }
+            else
+            {
+                return Json(new { result = new List<int>() });
+            }
+        }
     }
 }
