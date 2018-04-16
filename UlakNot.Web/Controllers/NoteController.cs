@@ -145,6 +145,11 @@ namespace UlakNot.Web.Controllers
             return View(notes.ToList());
         }
 
+        public ActionResult MostLiked()
+        {
+            return View(noteManager.ListQueryable().OrderByDescending(x => x.LikeTotal).ToList());
+        }
+
         [HttpPost]
         public ActionResult GetLiked(int[] ids)
         {
