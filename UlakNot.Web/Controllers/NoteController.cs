@@ -250,5 +250,49 @@ namespace UlakNot.Web.Controllers
         {
             return View(noteManager.ListQueryable().OrderByDescending(x => x.LikeTotal).ToList());
         }
+
+        public ActionResult InTheBag(int noteid, bool liked)
+        {
+            int res = 0;
+
+            if (SessionManager.User == null)
+                return Json(new { hasError = true, errorMessage = "Giriş yapmış kullanıcılar çantaya not atabilir!", result = 0 });
+
+            UnLike like =
+                likedManager.Find(x => x.Note.Id == noteid && x.LikedUser.Id == SessionManager.User.Id);
+
+            UnNotes note = noteManager.Find(x => x.Id == noteid);
+
+            if (like != null && liked == false)
+            {
+                res = likedManager.Delete(like);
+            }
+            else if (like == null && liked == true)
+            {
+                res = likedManager.Insert(new UnLike()
+                {
+                    LikedUser = SessionManager.User,
+                    Note = note
+                });
+            }
+
+            if (res > 0)
+            {
+                if (liked)
+                {
+                    note.LikeTotal++;
+                }
+                else
+                {
+                    note.LikeTotal--;
+                }
+
+                res = noteManager.Update(note);
+
+                return Json(new { hasError = false, errorMessage = string.Empty, result = note.LikeTotal });
+            }
+
+            return Json(new { hasError = true, errorMessage = "Çantaya not atma işlemi gerçekleştirilemedi.", result = note.LikeTotal });
+        }
     }
 }
