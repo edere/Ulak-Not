@@ -139,10 +139,10 @@ namespace UlakNot.Web.Controllers
         {
             var notes = likedManager.ListQueryable().Include("LikedUser").Include("Note").Where(
                 x => x.LikedUser.Id == SessionManager.User.Id).Select(
-                x => x.Note).Include("Category").Include("Owner").OrderByDescending(
+                x => x.Note).Include("Hashtags").Include("Owner").OrderByDescending(
                 x => x.CreatedDate);
 
-            return View("Index", notes.ToList());
+            return View(notes.ToList());
         }
 
         [HttpPost]
