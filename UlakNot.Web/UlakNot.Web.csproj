@@ -1162,6 +1162,7 @@
     <Content Include="Assets\js\jquery.incremental-counter.js" />
     <Content Include="Assets\js\jquery.scrollbar.min.js" />
     <Content Include="Assets\js\jquery.sticky-kit.min.js" />
+    <Content Include="Assets\js\like.js" />
     <Content Include="Assets\js\masonry.pkgd.min.js" />
     <Content Include="Assets\js\myprofile.js" />
     <Content Include="Assets\js\npm.js" />

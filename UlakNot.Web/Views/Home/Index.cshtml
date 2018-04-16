@@ -79,9 +79,10 @@
                         }
                     </p>
                     <div class="stats">
-                        <a href="#" class="btn btn-default stat-item">
-                            <i class="fa fa-thumbs-up icon"></i>@note.LikeTotal
-                        </a>
+                        <button class="btn btn-default stat-item" data-liked="false" data-note-id="@note.Id">
+                            <span class="fa fa-thumbs-o-up icon"></span>
+                            <span class="like-count">@note.LikeTotal</span>
+                        </button>
                         <a href="#" class="btn btn-default stat-item">
                             <i class="fa fa-share icon"></i>12
                         </a>
@@ -134,7 +135,7 @@
 {
 
     <script src="~/Assets/js/YorumAutosize.js"></script>
-
+    <script src="~/Assets/js/script.js"></script>
     <script>
         $(function () {
             var postActions = $('#list_PostActions');
