@@ -4,20 +4,21 @@ using System.Linq;
 using System.Web;
 using UlakNot.Common;
 using UlakNot.Entity;
+using UlakNot.Web.Models;
 
-namespace UlakNot.Web.Start
+namespace UlakNot.Web.Init
 {
     public class WebCommon : ICommon
     {
         public string GetUsername()
         {
-            if (HttpContext.Current.Session["login"] != null)
+            UnUsers user = SessionManager.User;
+            if (user != null)
             {
-                UnUsers user = HttpContext.Current.Session["login"] as UnUsers;
                 return user.Username;
             }
-
-            return "ulaknot";
+            else
+                return "ulaknot";
         }
     }
 }

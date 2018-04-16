@@ -5,6 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using UlakNot.Common;
 using UlakNot.Core;
 using UlakNot.Entity;
 
@@ -45,11 +46,12 @@ namespace UlakNot.DataLayer.EntityFramework
 
             if (obj is UnBase)
             {
-                UnBase b = new UnBase();
+                UnBase b = obj as UnBase;
                 DateTime now = DateTime.Now;
 
                 b.CreatedDate = now;
                 b.UpdatedDate = now;
+                b.UpdatedUserName = App.Common.GetUsername();
             }
 
             return Save();

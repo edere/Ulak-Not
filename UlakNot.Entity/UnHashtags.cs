@@ -31,5 +31,10 @@ namespace UlakNot.Entity
         public virtual List<UnNotes> Notes { get; set; }
 
         public virtual UnCategories Categories { get; set; }
+
+        public UnHashtags()
+        {
+            Notes = new List<UnNotes>();
+        }
     }
 }

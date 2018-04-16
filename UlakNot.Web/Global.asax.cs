@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using UlakNot.Common;
-using UlakNot.Web.Start;
+using UlakNot.Web.Init;
 
 namespace UlakNot.Web
 {

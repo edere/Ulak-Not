@@ -58,6 +58,7 @@ namespace UlakNot.Web.Controllers
             ModelState.Remove("UpdatedUserName");
             if (ModelState.IsValid)
             {
+                notes.Owner = SessionManager.User;
                 noteManager.Insert(notes);
                 return RedirectToAction("Index");
             }

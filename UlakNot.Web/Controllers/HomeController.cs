@@ -150,7 +150,7 @@ namespace UlakNot.Web.Controllers
             }
 
             Session["Login"] = res.Result;
-            return RedirectToAction("MyProfile");
+            return RedirectToAction("Settings");
         }
 
         public ActionResult UserActivate(Guid id)

@@ -32,5 +32,11 @@ namespace UlakNot.Entity
         public virtual List<UnLike> Likes { get; set; }
         public virtual List<UnComments> Comments { get; set; }
         public virtual UnUsers Owner { get; set; }
+
+        public UnNotes()
+        {
+            Comments = new List<UnComments>();
+            Likes = new List<UnLike>();
+        }
     }
 }
