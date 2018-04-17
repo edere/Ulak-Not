@@ -1578,6 +1578,7 @@
     <Content Include="App_Code\Bootstrap.cshtml" />
     <Content Include="Views\Note\MyLikedNotes.cshtml" />
     <Content Include="Views\Note\MostLiked.cshtml" />
+    <Content Include="Views\Home\NoteDetail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

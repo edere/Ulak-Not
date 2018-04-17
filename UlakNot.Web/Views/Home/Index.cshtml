@@ -64,7 +64,10 @@
                             <a href="#"><b>@note.Owner.Name @note.Owner.Surname</b></a>
                             tarafından gönderildi.
                         </div>
-                        <h6 class="text-muted time"><span class="glyphicon glyphicon-time"></span>@note.CreatedDate.ToString("dd/MM/yyyy HH:mm")</h6>
+                        <h6 class="text-muted time">
+                            <span class="fa fa-file-pdf-o icon"></span> @note.Title &nbsp;
+                            <span class="glyphicon glyphicon-time"></span> @note.CreatedDate.ToString("dd/MM/yyyy HH:mm")
+                        </h6>
                     </div>
                 </div>
                 <div class="post-description">
@@ -83,8 +86,11 @@
                             <span class="fa fa-thumbs-o-up icon"></span>
                             <span class="like-count">@note.LikeTotal</span>
                         </button>
-                        <a href="#" class="btn btn-default stat-item">
+                        @*<a href="#" class="btn btn-default stat-item">
                             <i class="fa fa-share icon"></i>12
+                        </a>*@
+                        <a href="#" class="btn btn-default stat-item" id="view" data-target="/Home/NoteDetail/@note.Id">
+                            <i class="fa fa-folder-open-o icon"></i>İncele
                         </a>
                     </div>
                 </div>
@@ -94,8 +100,8 @@
                             <div class="col-md-8">
                                 <div class="well well-lg">
                                     <div class="media1">
-                                        <a class="pull-left" href="#">
-                                            <img class="media-object img-circle" width="80px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAACDUlEQVR4Xu2Yz6/BQBDHpxoEcfTjVBVx4yjEv+/EQdwa14pTE04OBO+92WSavqoXOuFp+u1JY3d29rvfmQ9r7Xa7L8rxY0EAOAAlgB6Q4x5IaIKgACgACoACoECOFQAGgUFgEBgEBnMMAfwZAgaBQWAQGAQGgcEcK6DG4Pl8ptlsRpfLxcjYarVoOBz+knSz2dB6vU78Lkn7V8S8d8YqAa7XK83ncyoUCjQej2m5XNIPVmkwGFC73TZrypjD4fCQAK+I+ZfBVQLwZlerFXU6Her1eonreJ5HQRAQn2qj0TDukHm1Ws0Ix2O2260RrlQqpYqZtopVAoi1y+UyHY9Hk0O32w3FkI06jkO+74cC8Dh2y36/p8lkQovFgqrVqhFDEzONCCoB5OSk7qMl0Gw2w/Lo9/vmVMUBnGi0zi3Loul0SpVKJXRDmphvF0BOS049+n46nW5sHRVAXMAuiTZObcxnRVA5IN4DJHnXdU3dc+OLP/V63Vhd5haLRVM+0jg1MZ/dPI9XCZDUsbmuxc6SkGxKHCDzGJ2j0cj0A/7Mwti2fUOWR2Km2bxagHgt83sUgfcEkN4RLx0phfjvgEdi/psAaRf+lHmqEviUTWjygAC4EcKNEG6EcCOk6aJZnwsKgAKgACgACmS9k2vyBwVAAVAAFAAFNF0063NBAVAAFAAFQIGsd3JN/qBA3inwDTUHcp+19ttaAAAAAElFTkSuQmCC" alt="Generic placeholder image">
+                                        <a class="pull-left" href="#"><br />
+                                            <img class="media-object img-circle" width="50px" height="50px" src="~/Images/@note.Owner.ImageName" alt="Generic placeholder image">
                                         </a>
                                         <div class="media-body">
 
@@ -131,8 +137,56 @@
     }
 </div>
 
+<div class="modal fade bd-example-modal-lg" id="modelView" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidded="true">x</span>
+                </button>
+                
+            </div>
+            <form method="post">
+                <div class="modal-body">
+                </div>
+            </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                </div>
+            
+        </div>
+    </div>
+</div>
+
+
 @section scripts
 {
+    <script>
+        $(function () {
+            // a tagimizde bulunan .view classımıza click olduğunda
+            $("body").on("click", "#view", function () {
+                //data-target dan url mizi al
+                var url = $(this).data("target");
+                //bu urlimizi post et
+                $.post(url, function (data) { })
+                //eğer işlemimiz başarılı bir şekilde gerçekleşirse
+                .done(function (data) {
+                    //gelen datayı .modal-body mizin içerise html olarak ekle
+                    $("#modelView .modal-body").html(data);
+                    //sonra da modalimizi göster
+                    $("#modelView").modal("show");
+                })
+                //eğer işlem başarısız olursa
+                .fail(function () {
+                    //modalımızın bodysine Error! yaz
+                    $("#modelView .modal-body").text("Hata");
+                    //sonra da modalimizi göster
+                    $("#modelView").modal("show");
+                })
+
+            });
+        })
+    </script>
 
     <script src="~/Assets/js/YorumAutosize.js"></script>
     <script src="~/Assets/js/like.js"></script>

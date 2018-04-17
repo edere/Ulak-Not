@@ -193,6 +193,12 @@ namespace UlakNot.Web.Controllers
             return View(noteManager.ListQueryable().OrderByDescending(x => x.CreatedDate).ToList());
         }
 
+        [HttpPost]
+        public ActionResult NoteDetail(int? id)
+        {
+            return PartialView(noteManager.Find(x => x.Id == id));
+        }
+
         public ActionResult Department()
         {
             //if (id == null)
