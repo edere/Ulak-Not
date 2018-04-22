@@ -87,50 +87,55 @@
                             <span class="like-count">@note.LikeTotal</span>
                         </button>
                         @*<a href="#" class="btn btn-default stat-item">
-                            <i class="fa fa-share icon"></i>12
-                        </a>*@
-                        <a href="#" class="btn btn-default stat-item" id="view" data-target="/Home/NoteDetail/@note.Id">
+                                <i class="fa fa-share icon"></i>12
+                            </a>*@
+                        <button class="btn btn-default stat-item" id="view" data-target="/Home/NoteDetail/@note.Id">
                             <i class="fa fa-folder-open-o icon"></i>İncele
-                        </a>
+                        </button>
+
+                        <button class="btn btn-default stat-item pull-right" data-toggle="modal" data-target="#modal_comment" data-note-id="@note.Id">
+                            <span class="glyphicon glyphicon-comment"></span> Yorumlar
+                        </button>
                     </div>
                 </div>
                 <div class="post-footer">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-8">
-                                <div class="well well-lg">
-                                    <div class="media1">
-                                        <a class="pull-left" href="#"><br />
-                                            <img class="media-object img-circle" width="50px" height="50px" src="~/Images/@note.Owner.ImageName" alt="Generic placeholder image">
-                                        </a>
-                                        <div class="media-body">
+                    @*<div class="container">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="well well-lg">
+                                        <div class="media1">
+                                            <a class="pull-left" href="#">
+                                                <br />
+                                                <img class="media-object img-circle" width="50px" height="50px" src="~/Images/note.Owner.ImageName" alt="Generic placeholder image">
+                                            </a>
+                                            <div class="media-body">
 
-                                            <div class="form-group" style="padding:12px;">
-                                                <textarea class="form-control animated" placeholder="Yorum Gönder"></textarea>
-                                                <button class="btn btn-info pull-right" style="margin-top:10px" type="button">Gönder</button>
+                                                <div class="form-group" style="padding:12px;">
+                                                    <textarea class="form-control animated" placeholder="Yorum Gönder"></textarea>
+                                                    <button class="btn btn-info pull-right" style="margin-top:10px" type="button">Gönder</button>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>  <!-- well-sm -->
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel panel-white">
-                        <ul class="comments-list">
-                            <li class="comment">
-                                <a class="pull-left" href="#">
-                                    <img class="img-circle avatar" src="https://bootdey.com/img/Content/user_1.jpg" alt="avatar">
-                                </a>
-                                <div class="comment-body">
-                                    <div class="comment-heading">
-                                        <h4 class="user">Gavino Free</h4>
-                                        <h5 class="time">5 minutes ago</h5>
-                                    </div>
-                                    <p>Sure, oooooooooooooooohhhhhhhhhhhhhhhh</p>
+                                    </div>   well-sm
                                 </div>
-                            </li>
-                        </ul>
-                    </div>
+                            </div>
+                        </div>*@
+                    @*<div class="panel panel-white">
+                            <ul class="comments-list">
+                                <li class="comment">
+                                    <a class="pull-left" href="#">
+                                        <img class="img-circle avatar" src="https://bootdey.com/img/Content/user_1.jpg" alt="avatar">
+                                    </a>
+                                    <div class="comment-body">
+                                        <div class="comment-heading">
+                                            <h4 class="user">Gavino Free</h4>
+                                            <h5 class="time">5 minutes ago</h5>
+                                        </div>
+                                        <p>Sure, oooooooooooooooohhhhhhhhhhhhhhhh</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>*@
                 </div>
             </div>
         </div>
@@ -144,20 +149,19 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidded="true">x</span>
                 </button>
-                
             </div>
             <form method="post">
                 <div class="modal-body">
                 </div>
             </form>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
-                </div>
-            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+            </div>
         </div>
     </div>
 </div>
 
+@Bootstrap.ModalPopup(id: "modal_comment", title: "Yorumlar")
 
 @section scripts
 {
@@ -187,7 +191,7 @@
             });
         })
     </script>
-
+    <script src="~/Assets/js/comments.js"></script>
     <script src="~/Assets/js/YorumAutosize.js"></script>
     <script src="~/Assets/js/like.js"></script>
     <script>

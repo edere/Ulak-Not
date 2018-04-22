@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Abstract\ManagerBase.cs" />
     <Compile Include="Control\CategoryManager.cs" />
+    <Compile Include="Control\CommentManager.cs" />
     <Compile Include="Control\HashtagManager.cs" />
     <Compile Include="Control\LikedManager.cs" />
     <Compile Include="Control\NoteManager.cs" />
