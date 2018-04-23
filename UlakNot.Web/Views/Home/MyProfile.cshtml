@@ -80,12 +80,20 @@
                         }
                     </p>
                     <div class="stats">
-                        <a href="#" class="btn btn-default stat-item">
-                            <i class="fa fa-thumbs-up icon"></i>@item.LikeTotal
-                        </a>
-                        <a href="#" class="btn btn-default stat-item" id="view" data-target="/Home/NoteDetail/@item.Id">
+                        <button class="btn btn-default stat-item" type="button" data-liked="false" data-note-id="@item.Id">
+                            <span class="fa fa-thumbs-o-up icon"></span>
+                            <span class="like-count">@item.LikeTotal</span>
+                        </button>
+                        @*<a href="#" class="btn btn-default stat-item">
+                                <i class="fa fa-share icon"></i>12
+                            </a>*@
+                        <button class="btn btn-default stat-item" id="view" data-target="/Home/NoteDetail/@item.Id">
                             <i class="fa fa-folder-open-o icon"></i>İncele
-                        </a>
+                        </button>
+
+                        <button class="btn btn-default stat-item pull-right" data-toggle="modal" data-target="#modal_comment" data-note-id="@item.Id">
+                            <span class="glyphicon glyphicon-comment"></span> Yorumlar
+                        </button>
                     </div>
                 </div>
                 <div class="post-footer">
@@ -94,7 +102,8 @@
                             <div class="col-md-8">
                                 <div class="well well-lg">
                                     <div class="media1">
-                                        <a class="pull-left" href="#"><br />
+                                        <a class="pull-left" href="#">
+                                            <br />
                                             <img class="media-object img-circle" width="50px" height="50px" src="~/Images/@item.Owner.ImageName" alt="Generic placeholder image">
                                         </a>
                                         <div class="media-body">
@@ -131,6 +140,8 @@
     }
 </div>
 
+@Bootstrap.ModalPopup(id: "modal_comment", title: "Yorumlar")
+
 <div class="modal fade bd-example-modal-lg" id="modelView" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -138,7 +149,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidded="true">x</span>
                 </button>
-                
+
             </div>
             <form method="post">
                 <div class="modal-body">
@@ -147,7 +158,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
             </div>
-            
+
         </div>
     </div>
 </div>
@@ -155,7 +166,7 @@
 
 @section scripts
 {
-    
+
     <script>
         $(function () {
             // a tagimizde bulunan .view classımıza click olduğunda
@@ -182,7 +193,8 @@
             });
         })
     </script>
-
+    <script src="~/Assets/js/comments.js"></script>
+    <script src="~/Assets/js/like.js"></script>
     <script src="~/Assets/js/YorumAutosize.js"></script>
 
     <script>

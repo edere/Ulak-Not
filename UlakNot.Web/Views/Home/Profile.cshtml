@@ -1,0 +1,160 @@
+﻿@model IEnumerable<UlakNot.Entity.UnNotes>
+@{
+    ViewBag.Title = "Profilim";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <div class="well well-sm well-social-post">
+                <form>
+                    <ul class="list-inline" id='list_PostActions'>
+                        <li class='active'><a href='#'>Not Ekle</a></li>
+                        <li><a href='#'>Hashtag Ekle</a></li>
+                    </ul>
+                    <textarea class="form-control" placeholder="Çantandakileri Paylaş!"></textarea>
+                    <ul class='list-inline post-actions'>
+                        <li><a href="#"><span class="glyphicon glyphicon-camera"></span></a></li>
+                        <li><a href="#" class='glyphicon glyphicon-user'></a></li>
+                        <li><a href="#" class='glyphicon glyphicon-map-marker'></a></li>
+                        <li class='pull-right'><a href="#" class='btn btn-primary btn-xs'>Yayınla</a></li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+            <div class="col-md-12 col-sm-12">
+
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <input type="email" class="form-control" placeholder="What are you doing now?">
+                    </div>
+                    <div class="panel-footer">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-link"><i class="fa fa-map-marker"></i></button>
+                            <button type="button" class="btn btn-link"><i class="fa fa-users"></i></button>
+                            <button type="button" class="btn btn-link"><i class="fa fa-camera"></i></button>
+                            <button type="button" class="btn btn-link"><i class="fa fa-video-camera"></i></button>
+                            <button type="button" class="btn btn-link"><i class="fa fa-calendar-o"></i></button>
+                        </div>
+
+                        <div class="pull-right">
+                            <button type="button" class="btn btn-success">submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+
+<!-- List Notes -->
+<div class="row">
+
+    @foreach (var item in Model)
+    {
+        <div class="col-md-12">
+            <div class="panel panel-white post panel-shadow">
+                <div class="post-heading">
+                    <div class="pull-left image">
+                        <img src="~/Images/@item.Owner.ImageName" class="img-circle avatar" title="(@item.Owner.Id @item.Owner.Department)">
+                    </div>
+                    <div class="pull-left meta">
+                        <div class="title h5">
+                            <a href="#"><b>@item.Owner.Name @item.Owner.Surname</b></a>
+                        </div>
+                        <h6 class="text-muted time">
+                            <span class="fa fa-file-pdf-o icon"></span> @item.Title &nbsp;
+                            <span class="glyphicon glyphicon-time"></span> @item.CreatedDate.ToString("dd/MM/yyyy HH:mm")
+                        </h6>
+                    </div>
+                </div>
+                <div class="post-description">
+                    <p>
+                        @if (string.IsNullOrEmpty(item.Text) == false && item.Text.Length > 320)
+                        {
+                            @(item.Text.Substring(0, 320) + " ...")
+                        }
+                        else
+                        {
+                            @(item.Text)
+                        }
+                    </p>
+                    <div class="stats">
+                        <button class="btn btn-default stat-item" type="button" data-liked="false" data-note-id="@item.Id">
+                            <span class="fa fa-thumbs-o-up icon"></span>
+                            <span class="like-count">@item.LikeTotal</span>
+                        </button>
+                        @*<a href="#" class="btn btn-default stat-item">
+                                <i class="fa fa-share icon"></i>12
+                            </a>*@
+                        <button class="btn btn-default stat-item" id="view" data-target="/Home/NoteDetail/@item.Id">
+                            <i class="fa fa-folder-open-o icon"></i>İncele
+                        </button>
+
+                        <button class="btn btn-default stat-item pull-right" data-toggle="modal" data-target="#modal_comment" data-note-id="@item.Id">
+                            <span class="glyphicon glyphicon-comment"></span> Yorumlar
+                        </button>
+                    </div>
+                </div>
+                <div class="post-footer">
+
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="modal fade bd-example-modal-lg" id="modelView" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidded="true">x</span>
+                </button>
+            </div>
+            <form method="post">
+                <div class="modal-body">
+                </div>
+            </form>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Bootstrap.ModalPopup(id: "modal_comment", title: "Yorumlar")
+@section scripts
+{
+
+    <script>
+        $(function () {
+            // a tagimizde bulunan .view classımıza click olduğunda
+            $("body").on("click", "#view", function () {
+                //data-target dan url mizi al
+                var url = $(this).data("target");
+                //bu urlimizi post et
+                $.post(url, function (data) { })
+                    //eğer işlemimiz başarılı bir şekilde gerçekleşirse
+                    .done(function (data) {
+                        //gelen datayı .modal-body mizin içerise html olarak ekle
+                        $("#modelView .modal-body").html(data);
+                        //sonra da modalimizi göster
+                        $("#modelView").modal("show");
+                    })
+                    //eğer işlem başarısız olursa
+                    .fail(function () {
+                        //modalımızın bodysine Error! yaz
+                        $("#modelView .modal-body").text("Hata");
+                        //sonra da modalimizi göster
+                        $("#modelView").modal("show");
+                    })
+
+            });
+        })
+    </script>
+    <script src="~/Assets/js/comments.js"></script>
+    <script src="~/Assets/js/YorumAutosize.js"></script>
+    <script src="~/Assets/js/like.js"></script>
+
+}

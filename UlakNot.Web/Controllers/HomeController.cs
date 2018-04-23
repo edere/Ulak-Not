@@ -103,6 +103,20 @@ namespace UlakNot.Web.Controllers
             return View(res.Result);
         }
 
+        public ActionResult Profile(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var notes = noteManager.ListQueryable().Include("Hashtags").Include("Owner").Where(
+                x => x.Owner.Id == id).OrderByDescending(
+                x => x.CreatedDate);
+
+            return View(notes.ToList());
+        }
+
         public ActionResult MyProfile()
         {
             var notes = noteManager.ListQueryable().Include("Hashtags").Include("Owner").Where(
