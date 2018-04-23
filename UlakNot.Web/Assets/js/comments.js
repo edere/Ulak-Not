@@ -57,4 +57,22 @@ function doComment(btn, e, commentid, spanid) {
             });
         }
     }
+    else if (e === "new_clicked") {
+        var txt = $("#new_comment_text").val();
+
+        $.ajax({
+            method: "POST",
+            url: "/Comment/Create",
+            data: { "text": txt, "noteid": noteid }
+        }).done(function (data) {
+            if (data.result) {
+                // yorumlar partial tekrar yüklenir..
+                $(modalCommentBodyId).load("/Comment/ShowNoteComments/" + noteid);
+            } else {
+                alert("Yorum eklenemedi.");
+            }
+        }).fail(function () {
+            alert("Sunucu ile bağlantı kurulamadı.");
+        });
+    }
 }
