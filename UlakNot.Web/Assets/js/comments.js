@@ -75,4 +75,22 @@ function doComment(btn, e, commentid, spanid) {
             alert("Sunucu ile bağlantı kurulamadı.");
         });
     }
+    else if (e === "delete_clicked") {
+        var dialog_res = confirm("Yorum silinsin mi?");
+        if (!dialog_res) return false;
+
+        $.ajax({
+            method: "GET",
+            url: "/Comment/Delete/" + commentid
+        }).done(function (data) {
+            if (data.result) {
+                // yorumlar partial tekrar yüklenir..
+                $(modalCommentBodyId).load("/Comment/ShowNoteComments/" + noteid);
+            } else {
+                alert("Yorum silinemedi.");
+            }
+        }).fail(function () {
+            alert("Sunucu ile bağlantı kurulamadı.");
+        });
+    }
 }
