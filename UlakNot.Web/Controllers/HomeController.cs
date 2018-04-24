@@ -19,6 +19,7 @@ namespace UlakNot.Web.Controllers
         private CategoryManager categoryManager = new CategoryManager();
         private HashtagManager hashtagManager = new HashtagManager();
         private UserManager userManager = new UserManager();
+        private FriendManager friendManager = new FriendManager();
 
         public ActionResult CreateDatabase()
         {
@@ -272,6 +273,71 @@ namespace UlakNot.Web.Controllers
             }
 
             return View("Index", hash.Notes);
+        }
+
+        //public ActionResult GetFriend(int[] ids)
+        //{
+        //    if (SessionManager.User != null)
+        //    {
+        //    }
+        //}
+        public ActionResult AddFriend(int userid, bool addi)
+        {
+            int res = 0;
+            if (SessionManager.User == null)
+                return Json(new { hasError = true, errorMessage = "Hata", result = 0 });
+
+            UnFriend add = friendManager.Find(x => x.FriendId == userid && x.UserId == SessionManager.User.Id);
+            UnUsers user = userManager.Find(x => x.Id == userid);
+
+            if (add != null && addi == false)
+            {
+                res = friendManager.Delete(add);
+            }
+            else if (add == null && addi == true)
+            {
+                res = friendManager.Insert(new UnFriend()
+                {
+                    UserId = SessionManager.User.Id,
+                    FriendId = user.Id
+                });
+            }
+
+            return Json(new
+            {
+                hasError = true,
+                errorMessage = "Arkadaşlık isteği gönderildi."
+            });
+        }
+
+        public ActionResult ConfirmFriend(int userid, bool addi)
+        {
+            int res = 0;
+            if (SessionManager.User == null)
+                return Json(new { hasError = true, errorMessage = "Hata", result = 0 });
+
+            UnFriend add = friendManager.Find(x => x.FriendId == userid && x.UserId == SessionManager.User.Id);
+            UnUsers user = userManager.Find(x => x.Id == userid);
+
+            if (add == null && addi == true)
+            {
+                res = friendManager.Update(new UnFriend()
+                {
+                    Status = true
+                });
+            }
+
+            return Json(new
+
+            {
+                hasError = true,
+                errorMessage = "Onaylandı."
+            });
+        }
+
+        public ActionResult FriendList(int? id)
+        {
+            return View(friendManager.ListQueryable());
         }
     }
 }

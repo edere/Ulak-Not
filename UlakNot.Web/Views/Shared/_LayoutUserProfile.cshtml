@@ -1,0 +1,243 @@
+﻿@using UlakNot.Entity
+@using UlakNot.Web.Models
+@model List<UnNotes>
+@if (SessionManager.User == null)
+{
+
+    Response.Redirect("/Home/Login");
+
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="UlakNot desc" />
+    <meta name="keywords" content="UlakNot keywords" />
+    <meta name="robots" content="index, follow" />
+    <title>@ViewBag.Title</title>
+
+    <!-- Stylesheets
+    ================================================= -->
+    <link rel="stylesheet" href="~/Assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Assets/css/style.css" />
+    <link rel="stylesheet" href="~/Assets/css/ionicons.min.css" />
+    <link rel="stylesheet" href="~/Assets/css/font-awesome.min.css" />
+    <link href="css/emoji.css" rel="stylesheet">
+    <link href="~/Assets/css/categories.css" rel="stylesheet" />
+    @RenderSection("css", false)
+    <!--Google Font-->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
+    <!--Favicon-->
+    <link rel="shortcut icon" type="image/png" href="~/Assets/images/fav.png" />
+</head>
+<body>
+    <!-- Header
+        ================================================= -->
+    <header id="header">
+        <nav class="navbar navbar-default navbar-fixed-top menu">
+            <div class="container">
+
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Menü</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/Home/Index"><img src="~/Assets/images/ulaknotkucuk.png" alt="logo" /></a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right main-menu">
+                        <li class="dropdown"><a href="/Home/MyProfile"><i class="fa fa-user-circle"></i>&nbsp;@SessionManager.User.Name</a></li>
+                        <li class="dropdown"><a href="/Home/Index"><i class="fa fa-bars"></i>&nbsp;Anasayfa</a></li>
+                        <li><a href="Messages/Index"><i class="fa fa-comments"></i></a></li>
+                        <li class="dropdown"><a href="/Note/Index" class="nav-controller"><i class="fa fa-newspaper"></i>&nbsp;Not Yönetimi</a></li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-collapse-down"></i></a>
+                            <ul class="dropdown-menu newsfeed-home">
+                                @if (SessionManager.User.AdminAuthority)
+                                {
+                                    <li><a href="/Administrator/Index">Yönetim</a></li>
+                                }
+                                <li><a href="/Note/MyLikedNotes">Beğendiğim Notlar</a></li>
+                                <li><a href="/Note/MyLikedNotes">En Beğenilen Notlar</a></li>
+                                <li><a href="/Home/Settings">Ayarlar</a></li>
+                                <li><a href="/Home/Logout">Çıkış Yap</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <form class="navbar-form navbar-center hidden-sm">
+                        <div class="form-group col-md-4 col-md-offset-1">
+                            <i class="icon ion-android-search"></i>
+                            <input type="text" class="form-control" placeholder="Ara">
+                        </div>
+                    </form>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container -->
+        </nav>
+    </header>
+    <!--Header End-->
+
+    <div id="page-contents">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <!-- Newsfeed Common Side Bar Left
+                    ================================================= -->
+                    <div class="col-md-3 static">
+                        <div class="profile-card">
+                            <img src="~/Images/@Model.Find(x=>x.Id==x.Id).Owner.ImageName" class="profile-photo" alt="@Model.Find(x=>x.Id==x.Id).Owner.Name" />
+                            <h5><a href="timeline.html" class="text-white">@(Model.Find(x => x.Id == x.Id).Owner.Name + " " + Model.Find(x => x.Id == x.Id).Owner.Surname) </a></h5>
+                            <br /><br /><small> @Model.Find(x => x.Id == x.Id).Owner.University @Model.Find(x => x.Id == x.Id).Owner.Department</small><br /><br />
+                            <button class="btn btn-default btn-xs" type="button" data-addi="false" data-addi-id="@Model.Find(x => x.Id == x.Id).Owner.Id">
+                                <span class="ion ion-android-person-add ion"></span> Arkadaş Ekle
+                            </button>
+                            <button class="btn btn-default btn-xs">
+                                <span class="ion ion-paper-airplane"></span> Mesaj Gönder
+                            </button>
+                        </div><!--profile card ends-->
+
+                        @Html.Partial("_PartialCategory")
+
+                        <ul class="nav-news-feed">
+                            <li><i class="icon ion-ios-paper"></i><div><a href="newsfeed.html">Paylaştığım Notlar</a></div></li>
+                            <li><i class="icon ion-images"></i><div><a href="newsfeed-images.html">Çantamdakiler</a></div></li>
+                            <li><i class="icon ion-ios-heart-outline"></i><div><a href="newsfeed-people-nearby.html">Beğendiklerim</a></div></li>
+                            <li><i class="icon ion-ios-people-outline"></i><div><a href="newsfeed-friends.html">Arkadaşlarım</a></div></li>
+                            <li><i class="icon ion-chatboxes"></i><div><a href="newsfeed-messages.html">Mesajlar</a></div></li>
+                            <li><i class="icon ion-help"></i><div><a href="newsfeed-videos.html">???</a></div></li>
+                        </ul><!--news-feed links ends-->
+                        <div id="chat-block">
+                            <div class="title">Chat online</div>
+                            <ul class="online-users list-inline">
+                                <li><a href="newsfeed-messages.html" title="Linda Lohan"><img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
+                                <li><a href="newsfeed-messages.html" title="Sophia Lee"><img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
+                                <li><a href="newsfeed-messages.html" title="John Doe"><img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
+                                <li><a href="newsfeed-messages.html" title="Alexis Clark"><img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
+                                <li><a href="newsfeed-messages.html" title="James Carter"><img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
+                                <li><a href="newsfeed-messages.html" title="Robert Cook"><img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
+                                <li><a href="newsfeed-messages.html" title="Richard Bell"><img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
+                                <li><a href="newsfeed-messages.html" title="Anna Young"><img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
+                                <li><a href="newsfeed-messages.html" title="Julia Cox"><img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
+                            </ul>
+                        </div><!--chat block ends-->
+                    </div>
+
+                    <div class="col-md-9">
+
+                        <!-- Wall Box
+                        ================================================= -->
+                        <!-- Content -->
+                        @RenderBody()
+                    </div>
+
+                    <!-- Newsfeed Common Side Bar Right
+                    ================================================= -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer
+    ================================================= -->
+    <footer id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-wrapper">
+                    <div class="col-md-3 col-sm-3">
+                        <a href=""><img src="~/Assets/images/logo-black.png" alt="" class="footer-logo" /></a>
+                        <ul class="list-inline social-icons">
+                            <li><a href="#"><i class="icon ion-social-facebook"></i></a></li>
+                            <li><a href="#"><i class="icon ion-social-twitter"></i></a></li>
+                            <li><a href="#"><i class="icon ion-social-googleplus"></i></a></li>
+                            <li><a href="#"><i class="icon ion-social-pinterest"></i></a></li>
+                            <li><a href="#"><i class="icon ion-social-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-2 col-sm-2">
+                        <h5>For individuals</h5>
+                        <ul class="footer-links">
+                            <li><a href="">Signup</a></li>
+                            <li><a href="">login</a></li>
+                            <li><a href="">Explore</a></li>
+                            <li><a href="">Finder app</a></li>
+                            <li><a href="">Features</a></li>
+                            <li><a href="">Language settings</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-2 col-sm-2">
+                        <h5>For businesses</h5>
+                        <ul class="footer-links">
+                            <li><a href="">Business signup</a></li>
+                            <li><a href="">Business login</a></li>
+                            <li><a href="">Benefits</a></li>
+                            <li><a href="">Resources</a></li>
+                            <li><a href="">Advertise</a></li>
+                            <li><a href="">Setup</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-2 col-sm-2">
+                        <h5>About</h5>
+                        <ul class="footer-links">
+                            <li><a href="">About us</a></li>
+                            <li><a href="">Contact us</a></li>
+                            <li><a href="">Privacy Policy</a></li>
+                            <li><a href="">Terms</a></li>
+                            <li><a href="">Help</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 col-sm-3">
+                        <h5>İletişim</h5>
+                        <ul class="contact">
+                            <li><i class="icon ion-ios-telephone-outline"></i>533 666 8453</li>
+                            <li><i class="icon ion-ios-email-outline"></i>bilgi@ulaknot.com</li>
+                            <li><i class="icon ion-ios-location-outline"></i>Fırat Üniversitesi - Elazığ </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>2018 © Fırat Yazılım Mühendisliği </p>
+        </div>
+    </footer>
+
+    <!--preloader-->
+    <div id="spinner-wrapper">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Scripts
+    ================================================= -->
+    <script src="~/Assets/js/jquery-3.1.1.min.js"></script>
+    <script src="~/Assets/js/bootstrap.min.js"></script>
+    <script src="~/Assets/js/jquery.sticky-kit.min.js"></script>
+    <script src="~/Assets/js/jquery.scrollbar.min.js"></script>
+    <script src="~/Assets/js/script.js"></script>
+    <script src="~/Assets/js/friend.js"></script>
+    <script>
+        $(function () {
+
+            $('#slide-submenu').on('click', function () {
+                $(this).closest('.list-group').fadeOut('slide', function () {
+                    $('.mini-submenu').fadeIn();
+                });
+
+            });
+
+            $('.mini-submenu').on('click', function () {
+                $(this).next('.list-group').toggle('slide');
+                $('.mini-submenu').hide();
+            })
+        })
+    </script>
+    @RenderSection("scripts", false)
+</body>
+</html>

@@ -1158,6 +1158,7 @@
     <Content Include="Assets\js\bootstrap.js" />
     <Content Include="Assets\js\bootstrap.min.js" />
     <Content Include="Assets\js\comments.js" />
+    <Content Include="Assets\js\friend.js" />
     <Content Include="Assets\js\jquery-3.1.1.min.js" />
     <Content Include="Assets\js\jquery.appear.min.js" />
     <Content Include="Assets\js\jquery.incremental-counter.js" />
@@ -1583,6 +1584,7 @@
     <Content Include="Views\Home\NoteDetail.cshtml" />
     <Content Include="Views\Shared\_PartialComments.cshtml" />
     <Content Include="Views\Home\Profile.cshtml" />
+    <Content Include="Views\Shared\_LayoutUserProfile.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

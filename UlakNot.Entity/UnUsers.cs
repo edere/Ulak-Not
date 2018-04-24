@@ -76,5 +76,10 @@ namespace UlakNot.Entity
         public virtual List<UnLike> Likes { get; set; }
         public virtual List<UnComments> Comments { get; set; }
         public virtual List<UnMessages> Messages { get; set; }
+
+        public UnUsers()
+        {
+            Friends = new List<UnFriend>();
+        }
     }
 }
