@@ -14,7 +14,7 @@
                     </div>
                     <div class="pull-left meta">
                         <div class="title h5">
-                            <a href="#"><b>@note.Owner.Name @note.Owner.Surname</b></a>
+                            <a href="/Home/Profile/@note.Owner.Id"><b>@note.Owner.Name @note.Owner.Surname</b></a>
                             tarafından gönderildi.
                         </div>
                         <h6 class="text-muted time"><span class="glyphicon glyphicon-time"></span>@note.CreatedDate.ToString("dd/MM/yyyy HH:mm")</h6>
@@ -40,17 +40,49 @@
                             <span class="fa fa-share-square-o icon"></span>
                             <span class="bag-count">@note.BagTotal</span>
                         </button>
+                        @*<a href="#" class="btn btn-default stat-item">
+                                <i class="fa fa-share icon"></i>12
+                            </a>*@
+                        <button class="btn btn-default stat-item" id="view" data-target="/Home/NoteDetail/@note.Id">
+                            <i class="fa fa-folder-open-o icon"></i>İncele
+                        </button>
+
+                        <button class="btn btn-default stat-item pull-right" data-toggle="modal" data-target="#modal_comment" data-note-id="@note.Id">
+                            <span class="glyphicon glyphicon-comment"></span> Yorumlar
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     }
 </div>
+
+
+<div class="modal fade bd-example-modal-lg" id="modelView" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidded="true">x</span>
+                </button>
+            </div>
+            <form method="post">
+                <div class="modal-body">
+                </div>
+            </form>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>
+@Bootstrap.ModalPopup(id: "modal_comment", title: "Yorumlar")
 @section scripts
 {
     <script src="~/Assets/js/YorumAutosize.js"></script>
     <script src="~/Assets/js/like.js"></script>
     <script src="~/Assets/js/bag.js"></script>
+    <script src="~/Assets/js/comments.js"></script>
     <script>
         $(function () {
             var postActions = $('#list_PostActions');

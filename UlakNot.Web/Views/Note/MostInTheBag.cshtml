@@ -1,5 +1,144 @@
-﻿@{
-    ViewBag.Title = "MostInTheBag";
+﻿@model IEnumerable<UlakNot.Entity.UnNotes>
+@{
+    ViewBag.Title = "En Çok Çantaya Atılan Notlar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>MostInTheBag</h2>
+<div class="row">
+
+    @foreach (var note in Model)
+    {
+        <div class="col-md-12" data-note-id="@note.Id">
+            <div class="panel panel-white post panel-shadow">
+                <div class="post-heading">
+                    <div class="pull-left image">
+                        <img src="~/Images/@note.Owner.ImageName" class="img-circle avatar" title="(@note.Owner.Id @note.Owner.Department)">
+                    </div>
+                    <div class="pull-left meta">
+                        <div class="title h5">
+                            <a href="/Home/Profile/@note.Owner.Id"><b>@note.Owner.Name @note.Owner.Surname</b></a>
+                            tarafından gönderildi.
+                        </div>
+                        <h6 class="text-muted time"><span class="glyphicon glyphicon-time"></span>@note.CreatedDate.ToString("dd/MM/yyyy HH:mm")</h6>
+                    </div>
+                </div>
+                <div class="post-description">
+                    <p>
+                        @if (string.IsNullOrEmpty(note.Text) == false && note.Text.Length > 320)
+                        {
+                            @(note.Text.Substring(0, 320) + " ...")
+                        }
+                        else
+                        {
+                            @(note.Text)
+                        }
+                    </p>
+                    <div class="stats">
+                        <button class="btn btn-default stat-item" type="button" data-liked="false" data-note-id="@note.Id">
+                            <span class="fa fa-thumbs-o-up icon"></span>
+                            <span class="like-count">@note.LikeTotal</span>
+                        </button>
+                        <button class="btn btn-default stat-item" type="button" title="Çantaya At" data-baged="false" data-note-id="@note.Id">
+                            <span class="fa fa-share-square-o icon"></span>
+                            <span class="bag-count">@note.BagTotal</span>
+                        </button>
+                        @*<a href="#" class="btn btn-default stat-item">
+                                <i class="fa fa-share icon"></i>12
+                            </a>*@
+                        <button class="btn btn-default stat-item" id="view" data-target="/Home/NoteDetail/@note.Id">
+                            <i class="fa fa-folder-open-o icon"></i>İncele
+                        </button>
+
+                        <button class="btn btn-default stat-item pull-right" data-toggle="modal" data-target="#modal_comment" data-note-id="@note.Id">
+                            <span class="glyphicon glyphicon-comment"></span> Yorumlar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="modal fade bd-example-modal-lg" id="modelView" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidded="true">x</span>
+                </button>
+            </div>
+            <form method="post">
+                <div class="modal-body">
+                </div>
+            </form>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Bootstrap.ModalPopup(id: "modal_comment", title: "Yorumlar")
+@section scripts
+{
+
+
+
+    <script src="~/Assets/js/YorumAutosize.js"></script>
+    <script src="~/Assets/js/like.js"></script>
+    <script src="~/Assets/js/bag.js"></script>
+    <script src="~/Assets/js/comments.js"></script>
+    <script>
+        $(function () {
+            // a tagimizde bulunan .view classımıza click olduğunda
+            $("body").on("click", "#view", function () {
+                //data-target dan url mizi al
+                var url = $(this).data("target");
+                //bu urlimizi post et
+                $.post(url, function (data) { })
+                    //eğer işlemimiz başarılı bir şekilde gerçekleşirse
+                    .done(function (data) {
+                        //gelen datayı .modal-body mizin içerise html olarak ekle
+                        $("#modelView .modal-body").html(data);
+                        //sonra da modalimizi göster
+                        $("#modelView").modal("show");
+                    })
+                    //eğer işlem başarısız olursa
+                    .fail(function () {
+                        //modalımızın bodysine Error! yaz
+                        $("#modelView .modal-body").text("Hata");
+                        //sonra da modalimizi göster
+                        $("#modelView").modal("show");
+                    })
+
+            });
+        })
+    </script>
+    <script>
+        $(function () {
+            var postActions = $('#list_PostActions');
+            var currentAction = $('#list_PostActions li.active');
+            if (currentAction.length === 0) {
+                postActions.find('li:first').addClass('active');
+            }
+            postActions.find('li').on('click', function (e) {
+                e.preventDefault();
+                var self = $(this);
+                if (self === currentAction) { return; }
+                // else
+                currentAction.removeClass('active');
+                self.addClass('active');
+                currentAction = self;
+            });
+        });
+    </script>
+
+    <!-- Yorum Yazma AutoSize-->
+    <script>
+        $(function () {
+            $('.normal').autosize();
+            $('.animated').autosize({ append: "\n" });
+        });
+    </script>
+
+}
