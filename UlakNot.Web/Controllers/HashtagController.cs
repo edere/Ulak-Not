@@ -90,7 +90,7 @@ namespace UlakNot.Web.Controllers
                 UnHashtags unhastag = hashtagManager.Find(x => x.Id == hashtag.Id);
                 unhastag.Code = hashtag.Code;
                 unhastag.Description = hashtag.Description;
-                unhastag.CategoriesId = hashtag.CategoriesId;
+                //unhastag.CategoriesId = hashtag.CategoriesId;
                 hashtagManager.Update(unhastag);
                 return RedirectToAction("Index");
             }

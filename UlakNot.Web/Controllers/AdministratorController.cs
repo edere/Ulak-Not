@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -14,6 +15,8 @@ namespace UlakNot.Web.Controllers
     public class AdministratorController : Controller
     {
         private CategoryManager categoryManager = new CategoryManager();
+        private HashtagManager hashtagManager = new HashtagManager();
+        
 
         // GET: Administrator
         public ActionResult Login()
@@ -157,6 +160,113 @@ namespace UlakNot.Web.Controllers
             UnCategories category = categoryManager.Find(x => x.Id == id);
             categoryManager.Delete(category);
             return RedirectToAction("Category");
+        }
+
+        public ActionResult Hashtag()
+        {
+            var hashtag = hashtagManager.ListQueryable().Include("Categories");
+            return View(hashtag.ToList());
+        }
+
+        public ActionResult HDetails(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            UnHashtags hashtag = hashtagManager.Find(x => x.Id == id.Value);
+            if (hashtag == null)
+            {
+                return HttpNotFound();
+            }
+            return View(hashtag);
+        }
+
+        public ActionResult HCreate()
+        {
+            ViewBag.CategoriesId = new SelectList(categoryManager.List(), "Id", "Name");
+
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult HCreate(UnHashtags hashtag)
+        {
+            ModelState.Remove("HashtagUser");
+            ModelState.Remove("HashtagUser_Id");
+            if (ModelState.IsValid)
+            {
+                hashtagManager.Insert(hashtag);
+                return RedirectToAction("Hashtag");
+            }
+
+            ViewBag.CategoriesId = new SelectList(hashtagManager.List(), "Id", "Name", hashtag.CategoriesId);
+            return View(hashtag);
+        }
+
+        public ActionResult HEdit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            UnHashtags hashtag = hashtagManager.Find(x => x.Id == id);
+
+            if (hashtag == null)
+            {
+                return HttpNotFound();
+            }
+
+            ViewBag.CategoriesId = new SelectList(hashtagManager.List(), "Id", "Name", hashtag.CategoriesId);
+            return View(hashtag);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult HEdit(UnHashtags hashtag)
+        {
+            ModelState.Remove("HashtagUser");
+            ModelState.Remove("HashtagUser_Id");
+            if (ModelState.IsValid)
+            {
+                UnHashtags unhastag = hashtagManager.Find(x => x.Id == hashtag.Id);
+                unhastag.Code = hashtag.Code;
+                unhastag.Description = hashtag.Description;
+                //unhastag.CategoriesId = hashtag.CategoriesId;
+                hashtagManager.Update(unhastag);
+                return RedirectToAction("Hashtag");
+            }
+
+            ViewBag.CategoriesId = new SelectList(hashtagManager.List(), "Id", "Name", hashtag.CategoriesId);
+
+            return View(hashtag);
+        }
+
+        public ActionResult HDelete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            UnHashtags hashtag = hashtagManager.Find(x => x.Id == id);
+            if (hashtag == null)
+            {
+                return HttpNotFound();
+            }
+            return View(hashtag);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult HDeleteConfirmed(int id)
+        {
+            UnHashtags hashtag = hashtagManager.Find(x => x.Id == id);
+            hashtagManager.Delete(hashtag);
+            return RedirectToAction("Hashtag");
         }
     }
 }

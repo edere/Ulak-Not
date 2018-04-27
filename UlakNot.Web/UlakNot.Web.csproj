@@ -1604,6 +1604,11 @@
     <Content Include="Views\Administrator\Create.cshtml" />
     <Content Include="Views\Administrator\Edit.cshtml" />
     <Content Include="Views\Administrator\Delete.cshtml" />
+    <Content Include="Views\Administrator\Hashtag.cshtml" />
+    <Content Include="Views\Administrator\HDetails.cshtml" />
+    <Content Include="Views\Administrator\HCreate.cshtml" />
+    <Content Include="Views\Administrator\HEdit.cshtml" />
+    <Content Include="Views\Administrator\HDelete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
