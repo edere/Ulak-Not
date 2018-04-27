@@ -28,6 +28,10 @@ namespace UlakNot.Entity
         [DisplayName("Hashtag")]
         public int HashtagsId { get; set; }
 
+        [DisplayName("Çantada")]
+        public int BagTotal { get; set; }
+
+        public virtual List<UnBag> Bags { get; set; }
         public virtual UnHashtags Hashtags { get; set; }
         public virtual List<UnLike> Likes { get; set; }
         public virtual List<UnComments> Comments { get; set; }
@@ -37,6 +41,7 @@ namespace UlakNot.Entity
         {
             Comments = new List<UnComments>();
             Likes = new List<UnLike>();
+            Bags = new List<UnBag>();
         }
     }
 }

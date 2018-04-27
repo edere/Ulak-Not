@@ -74,6 +74,7 @@ namespace UlakNot.Entity
         public virtual List<UnNotes> Notes { get; set; }
         public virtual List<UnHashtags> Hashtags { get; set; }
         public virtual List<UnLike> Likes { get; set; }
+        public virtual List<UnBag> Bags { get; set; }
         public virtual List<UnComments> Comments { get; set; }
         public virtual List<UnMessages> Messages { get; set; }
 

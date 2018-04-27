@@ -1,0 +1,79 @@
+﻿@model IEnumerable<UlakNot.Entity.UnNotes>
+@{
+    ViewBag.Title = "Çantamdakiler";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    @foreach (var note in Model)
+    {
+        <div class="col-md-12" data-note-id="@note.Id">
+            <div class="panel panel-white post panel-shadow">
+                <div class="post-heading">
+                    <div class="pull-left image">
+                        <img src="~/Images/@note.Owner.ImageName" class="img-circle avatar" title="(@note.Owner.Id @note.Owner.Department)">
+                    </div>
+                    <div class="pull-left meta">
+                        <div class="title h5">
+                            <a href="#"><b>@note.Owner.Name @note.Owner.Surname</b></a>
+                            tarafından gönderildi.
+                        </div>
+                        <h6 class="text-muted time"><span class="glyphicon glyphicon-time"></span>@note.CreatedDate.ToString("dd/MM/yyyy HH:mm")</h6>
+                    </div>
+                </div>
+                <div class="post-description">
+                    <p>
+                        @if (string.IsNullOrEmpty(note.Text) == false && note.Text.Length > 320)
+                        {
+                            @(note.Text.Substring(0, 320) + " ...")
+                        }
+                        else
+                        {
+                            @(note.Text)
+                        }
+                    </p>
+                    <div class="stats">
+                        <button class="btn btn-default stat-item" type="button" data-liked="false" data-note-id="@note.Id">
+                            <span class="fa fa-thumbs-o-up icon"></span>
+                            <span class="like-count">@note.LikeTotal</span>
+                        </button>
+                        <button class="btn btn-default stat-item" type="button" title="Çantaya At" data-baged="false" data-note-id="@note.Id">
+                            <span class="fa fa-share-square-o icon"></span>
+                            <span class="bag-count">@note.BagTotal</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+@section scripts
+{
+    <script src="~/Assets/js/YorumAutosize.js"></script>
+    <script src="~/Assets/js/like.js"></script>
+    <script src="~/Assets/js/bag.js"></script>
+    <script>
+        $(function () {
+            var postActions = $('#list_PostActions');
+            var currentAction = $('#list_PostActions li.active');
+            if (currentAction.length === 0) {
+                postActions.find('li:first').addClass('active');
+            }
+            postActions.find('li').on('click', function (e) {
+                e.preventDefault();
+                var self = $(this);
+                if (self === currentAction) { return; }
+                // else
+                currentAction.removeClass('active');
+                self.addClass('active');
+                currentAction = self;
+            });
+        });
+    </script>
+    <!-- Yorum Yazma AutoSize-->
+    <script>
+        $(function () {
+            $('.normal').autosize();
+            $('.animated').autosize({ append: "\n" });
+        });
+    </script>
+}

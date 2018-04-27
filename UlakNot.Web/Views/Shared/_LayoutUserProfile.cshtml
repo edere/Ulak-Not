@@ -92,13 +92,15 @@
                     <!-- Newsfeed Common Side Bar Left
                     ================================================= -->
                     <div class="col-md-3 static">
-                        <div class="profile-card">
+                        <div class="profile-card" data-addi-id="@Model.Find(x => x.Id == x.Id).Owner.Id">
                             <img src="~/Images/@Model.Find(x=>x.Id==x.Id).Owner.ImageName" class="profile-photo" alt="@Model.Find(x=>x.Id==x.Id).Owner.Name" />
                             <h5><a href="timeline.html" class="text-white">@(Model.Find(x => x.Id == x.Id).Owner.Name + " " + Model.Find(x => x.Id == x.Id).Owner.Surname) </a></h5>
-                            <br /><br /><small> @Model.Find(x => x.Id == x.Id).Owner.University @Model.Find(x => x.Id == x.Id).Owner.Department</small><br /><br />
+                            <br /><br /><br /><small> @Model.Find(x => x.Id == x.Id).Owner.University @Model.Find(x => x.Id == x.Id).Owner.Department</small><br /><br />
+
                             <button class="btn btn-default btn-xs" type="button" data-addi="false" data-addi-id="@Model.Find(x => x.Id == x.Id).Owner.Id">
-                                <span class="ion ion-android-person-add ion"></span> Arkadaş Ekle
+                                <span class="ion ion-android-person-add ion" id="add_friend"> Arkadaş Ekle</span>
                             </button>
+
                             <button class="btn btn-default btn-xs">
                                 <span class="ion ion-paper-airplane"></span> Mesaj Gönder
                             </button>
@@ -215,29 +217,14 @@
     </div>
 
     <!-- Scripts
-    ================================================= -->
+        ================================================= -->
     <script src="~/Assets/js/jquery-3.1.1.min.js"></script>
     <script src="~/Assets/js/bootstrap.min.js"></script>
     <script src="~/Assets/js/jquery.sticky-kit.min.js"></script>
     <script src="~/Assets/js/jquery.scrollbar.min.js"></script>
     <script src="~/Assets/js/script.js"></script>
     <script src="~/Assets/js/friend.js"></script>
-    <script>
-        $(function () {
 
-            $('#slide-submenu').on('click', function () {
-                $(this).closest('.list-group').fadeOut('slide', function () {
-                    $('.mini-submenu').fadeIn();
-                });
-
-            });
-
-            $('.mini-submenu').on('click', function () {
-                $(this).next('.list-group').toggle('slide');
-                $('.mini-submenu').hide();
-            })
-        })
-    </script>
     @RenderSection("scripts", false)
 </body>
 </html>

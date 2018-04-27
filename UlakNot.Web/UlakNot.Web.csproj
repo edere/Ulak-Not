@@ -1155,6 +1155,7 @@
     <Content Include="Assets\images\bullet.png" />
     <Content Include="Assets\images\logoulaknot.png" />
     <Content Include="Assets\images\ulaknotkucuk.png" />
+    <Content Include="Assets\js\bag.js" />
     <Content Include="Assets\js\bootstrap.js" />
     <Content Include="Assets\js\bootstrap.min.js" />
     <Content Include="Assets\js\comments.js" />
@@ -1585,6 +1586,8 @@
     <Content Include="Views\Shared\_PartialComments.cshtml" />
     <Content Include="Views\Home\Profile.cshtml" />
     <Content Include="Views\Shared\_LayoutUserProfile.cshtml" />
+    <Content Include="Views\Note\MyBag.cshtml" />
+    <Content Include="Views\Note\MostInTheBag.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

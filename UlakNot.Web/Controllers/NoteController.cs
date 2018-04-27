@@ -17,6 +17,7 @@ namespace UlakNot.Web.Controllers
         private NoteManager noteManager = new NoteManager();
         private HashtagManager hastagManager = new HashtagManager();
         private LikedManager likedManager = new LikedManager();
+        private BagManager bagManager = new BagManager();
 
         // Kendi Notlarını Göster
         public ActionResult Index()
@@ -229,13 +230,28 @@ namespace UlakNot.Web.Controllers
             return PartialView("_PartialNoteText", note);
         }
 
+        public ActionResult MyBag()
+        {
+            var notes = bagManager.ListQueryable().Include("BagUser").Include("Note").Where(
+                x => x.BagUser.Id == SessionManager.User.Id).Select(
+                x => x.Note).Include("Owner").OrderByDescending(
+                x => x.CreatedDate);
+
+            return View(notes.ToList());
+        }
+
+        public ActionResult MostInTheBag()
+        {
+            return View(noteManager.ListQueryable().OrderByDescending(x => x.BagTotal).ToList());
+        }
+
         [HttpPost]
         public ActionResult GetBag(int[] id_bag)
         {
             if (SessionManager.User != null)
             {
-                List<int> BagNoteIds = likedManager.List(
-                    x => x.LikedUser.Id == SessionManager.User.Id && id_bag.Contains(x.Note.Id)).Select(
+                List<int> BagNoteIds = bagManager.List(
+                    x => x.BagUser.Id == SessionManager.User.Id && id_bag.Contains(x.Note.Id)).Select(
                     x => x.Note.Id).ToList();
 
                 return Json(new { result = BagNoteIds });
@@ -246,53 +262,49 @@ namespace UlakNot.Web.Controllers
             }
         }
 
-        public ActionResult MostInTheBag()
-        {
-            return View(noteManager.ListQueryable().OrderByDescending(x => x.LikeTotal).ToList());
-        }
-
-        public ActionResult InTheBag(int noteid, bool liked)
+        [HttpPost]
+        public ActionResult InTheBag(int noteid, bool baged)
         {
             int res = 0;
 
             if (SessionManager.User == null)
                 return Json(new { hasError = true, errorMessage = "Giriş yapmış kullanıcılar çantaya not atabilir!", result = 0 });
 
-            UnLike like =
-                likedManager.Find(x => x.Note.Id == noteid && x.LikedUser.Id == SessionManager.User.Id);
+            UnBag bag =
+                bagManager.Find(x => x.Note.Id == noteid && x.BagUser.Id == SessionManager.User.Id);
 
             UnNotes note = noteManager.Find(x => x.Id == noteid);
 
-            if (like != null && liked == false)
+            if (bag != null && baged == false)
             {
-                res = likedManager.Delete(like);
+                res = bagManager.Delete(bag);
             }
-            else if (like == null && liked == true)
+            else if (bag == null && baged == true)
             {
-                res = likedManager.Insert(new UnLike()
+                res = bagManager.Insert(new UnBag()
                 {
-                    LikedUser = SessionManager.User,
+                    BagUser = SessionManager.User,
                     Note = note
                 });
             }
 
             if (res > 0)
             {
-                if (liked)
+                if (baged)
                 {
-                    note.LikeTotal++;
+                    note.BagTotal++;
                 }
                 else
                 {
-                    note.LikeTotal--;
+                    note.BagTotal--;
                 }
 
                 res = noteManager.Update(note);
 
-                return Json(new { hasError = false, errorMessage = string.Empty, result = note.LikeTotal });
+                return Json(new { hasError = false, errorMessage = string.Empty, result = note.BagTotal });
             }
 
-            return Json(new { hasError = true, errorMessage = "Çantaya not atma işlemi gerçekleştirilemedi.", result = note.LikeTotal });
+            return Json(new { hasError = true, errorMessage = "Çantaya not atma işlemi gerçekleştirilemedi.", result = note.BagTotal });
         }
     }
 }

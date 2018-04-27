@@ -14,6 +14,7 @@ namespace UlakNot.DataLayer
         public DbSet<UnComments> Comments { get; set; }
         public DbSet<UnHashtags> Hashtags { get; set; }
         public DbSet<UnLike> Unlikes { get; set; }
+        public DbSet<UnBag> Bags { get; set; }
         public DbSet<UnMessages> Messages { get; set; }
         public DbSet<UnNotes> Notes { get; set; }
         public DbSet<UnSettings> Settings { get; set; }

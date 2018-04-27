@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnBag.cs" />
     <Compile Include="UnBase.cs" />
     <Compile Include="UnCategories.cs" />
     <Compile Include="UnComments.cs" />

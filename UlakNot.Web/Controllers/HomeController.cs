@@ -275,12 +275,15 @@ namespace UlakNot.Web.Controllers
             return View("Index", hash.Notes);
         }
 
-        //public ActionResult GetFriend(int[] ids)
-        //{
-        //    if (SessionManager.User != null)
-        //    {
-        //    }
-        //}
+        public ActionResult GetFriend(int[] ids)
+        {
+            List<int> getFriendIds = friendManager
+                .List(x => x.UserId == SessionManager.User.Id && ids.Contains(x.FriendId)).Select(x => x.User.Id)
+                .ToList();
+
+            return Json(new { result = getFriendIds });
+        }
+
         public ActionResult AddFriend(int userid, bool addi)
         {
             int res = 0;
@@ -303,10 +306,15 @@ namespace UlakNot.Web.Controllers
                 });
             }
 
+            if (res > 0)
+            {
+                return Json(new { hasError = false, errorMessage = string.Empty });
+            }
+
             return Json(new
             {
                 hasError = true,
-                errorMessage = "Arkadaşlık isteği gönderildi."
+                errorMessage = "Arkadaşlık isteği gönderilemedi. Hata!"
             });
         }
 

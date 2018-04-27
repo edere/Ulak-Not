@@ -87,6 +87,10 @@
                             <span class="fa fa-thumbs-o-up icon"></span>
                             <span class="like-count">@note.LikeTotal</span>
                         </button>
+                        <button class="btn btn-default stat-item" type="button" title="Çantaya At" data-baged="false" data-note-id="@note.Id">
+                            <span class="fa fa-share-square-o icon"></span>
+                            <span class="bag-count">@note.BagTotal</span>
+                        </button>
                         @*<a href="#" class="btn btn-default stat-item">
                                 <i class="fa fa-share icon"></i>12
                             </a>*@
@@ -195,6 +199,7 @@
     <script src="~/Assets/js/comments.js"></script>
     <script src="~/Assets/js/YorumAutosize.js"></script>
     <script src="~/Assets/js/like.js"></script>
+    <script src="~/Assets/js/bag.js"></script>
     <script>
         $(function () {
             var postActions = $('#list_PostActions');
