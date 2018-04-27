@@ -49,6 +49,9 @@ namespace UlakNot.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(UnCategories category)
         {
+            ModelState.Remove("UpdatedDate");
+            ModelState.Remove("CreatedDate");
+            ModelState.Remove("UpdatedUserName");
             if (ModelState.IsValid)
             {
                 categoryManager.Insert(category);

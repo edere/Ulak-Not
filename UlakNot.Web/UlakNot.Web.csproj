@@ -1187,6 +1187,7 @@
     <Compile Include="Controllers\AdministratorController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\CommentController.cs" />
+    <Compile Include="Controllers\HashtagController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NoteController.cs" />
     <Compile Include="Controllers\UyelerController.cs" />
@@ -1593,6 +1594,11 @@
     <Content Include="Views\Category\Details.cshtml" />
     <Content Include="Views\Category\Edit.cshtml" />
     <Content Include="Views\Category\Index.cshtml" />
+    <Content Include="Views\Hashtag\Create.cshtml" />
+    <Content Include="Views\Hashtag\Delete.cshtml" />
+    <Content Include="Views\Hashtag\Details.cshtml" />
+    <Content Include="Views\Hashtag\Edit.cshtml" />
+    <Content Include="Views\Hashtag\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
