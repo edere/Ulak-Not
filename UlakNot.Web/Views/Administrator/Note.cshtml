@@ -1,0 +1,91 @@
+﻿@model IEnumerable<UlakNot.Entity.UnNotes>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+
+    <div class="col-md-12">
+        <h2>@ViewBag.Title</h2>
+        <hr />
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+
+        <p>
+            @Bootstrap.LinkButton("/Administrator/NCreate", "primary", string.Empty, string.Empty, "plus", " Yeni")
+        </p>
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Hashtags.Code)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Text)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Draft)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LikeTotal)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Hashtags.Code)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @if (item.Text.Length > 200)
+                        {
+
+                            @(item.Text.Substring(0, 200) + "...")
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(modelItem => item.Text)
+                        }
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Draft)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LikeTotal)
+                    </td>
+                    <td width="150">
+
+
+                        @Bootstrap.LinkButton("/Administrator/NEdit/" + item.Id, "warning", "btn-xs", "Düzenle", "edit", string.Empty)
+
+                        @Bootstrap.LinkButton("/Administrator/NDetails/" + item.Id, "info", "btn-xs", "Detaylar", "search", string.Empty)
+
+                        @Bootstrap.LinkButton("/Administrator/NDelete/" + item.Id, "danger", "btn-xs", "Kaldır", "trash", string.Empty)
+
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+    </div>
+
+</div>
+
+@Bootstrap.ModalPopup(id: "modal_comment", title: "Yorumlar")
+<script src="~/Scripts/comment.js"></script>
