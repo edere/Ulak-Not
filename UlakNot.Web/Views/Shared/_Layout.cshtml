@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="~/Assets/css/style.css" />
     <link rel="stylesheet" href="~/Assets/css/ionicons.min.css" />
     <link rel="stylesheet" href="~/Assets/css/font-awesome.min.css" />
+    <link href="~/Assets/css/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" />
     <link href="css/emoji.css" rel="stylesheet">
     <link href="~/Assets/css/categories.css" rel="stylesheet" />
     <link href="~/Assets/css/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" />
@@ -222,6 +223,14 @@
     <script src="~/Assets/js/script.js"></script>
     <script src="~/Assets/js/jquery-ui-1.10.4.custom.min.js"></script>
     <script src="~/Assets/js/jquery-1.10.2.js"></script>
+<script>
+    $(function () {
+        $("#txtSearch").autocomplete({
+            source: '@Url.Action("GetSearchNotes")',
+            minLength: 1
+        });
+    });
+</script>
     <script>
         $(function () {
 

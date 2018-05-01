@@ -226,6 +226,12 @@ namespace UlakNot.Web.Controllers
             return View(note.ToList());
         }
 
+        public JsonResult GetSearchNotes(string txtSearch)
+        {
+            List<string> result = noteManager.ListQueryable().Where(x=>x.Title.StartsWith(txtSearch)).Select(x=>x.Title).ToList();
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         public ActionResult NoteDetail(int? id)
         {
