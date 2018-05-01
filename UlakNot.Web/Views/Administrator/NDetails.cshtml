@@ -1,0 +1,59 @@
+﻿@model UlakNot.Entity.UnNotes
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>UnNotes</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Hashtags.Code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hashtags.Code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Text)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Text)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Draft)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Draft)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LikeTotal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LikeTotal)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "NEdit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Note")
+</p>

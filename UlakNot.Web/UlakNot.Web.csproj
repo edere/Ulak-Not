@@ -1599,7 +1599,7 @@
     <Content Include="Views\Home\Settings.cshtml" />
     <Content Include="Views\Shared\_LayoutMenu.cshtml" />
     <Content Include="App_Code\Bootstrap.cshtml" />
-    <Content Include="Views\Note\MyLikedNotes.cshtml" />
+    <Content Include="Views\Shared\MyLikedNotes.cshtml" />
     <Content Include="Views\Note\MostLiked.cshtml" />
     <Content Include="Views\Home\NoteDetail.cshtml" />
     <Content Include="Views\Shared\_PartialComments.cshtml" />
@@ -1622,6 +1622,16 @@
     <Content Include="Views\Administrator\Create.cshtml" />
     <Content Include="Views\Administrator\Edit.cshtml" />
     <Content Include="Views\Administrator\Delete.cshtml" />
+    <Content Include="Views\Administrator\Hashtag.cshtml" />
+    <Content Include="Views\Administrator\HDetails.cshtml" />
+    <Content Include="Views\Administrator\HCreate.cshtml" />
+    <Content Include="Views\Administrator\HEdit.cshtml" />
+    <Content Include="Views\Administrator\HDelete.cshtml" />
+    <Content Include="Views\Administrator\Note.cshtml" />
+    <Content Include="Views\Administrator\NDetails.cshtml" />
+    <Content Include="Views\Administrator\NCreate.cshtml" />
+    <Content Include="Views\Administrator\NEdit.cshtml" />
+    <Content Include="Views\Administrator\NDelete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
