@@ -20,7 +20,8 @@ namespace UlakNot.Web.Controllers
         private HashtagManager hashtagManager = new HashtagManager();
         private UserManager userManager = new UserManager();
         private FriendManager friendManager = new FriendManager();
-
+       
+        
         public ActionResult CreateDatabase()
         {
             BusinessLayer.CreateDatabase dbc = new BusinessLayer.CreateDatabase();
@@ -206,6 +207,23 @@ namespace UlakNot.Web.Controllers
         {
             //BusinessLayer.CreateDatabase dbc = new BusinessLayer.CreateDatabase();
             return View(noteManager.ListQueryable().OrderByDescending(x => x.CreatedDate).ToList());
+        }
+
+        [HttpPost]
+        public ActionResult Index(string txtSearch)
+        {
+            List<UnNotes> note;
+            if (string.IsNullOrEmpty(txtSearch))
+            {
+                note = noteManager.ListQueryable().OrderByDescending(x => x.CreatedDate).ToList();
+            }
+
+            else
+            {
+               note = noteManager.ListQueryable().Where(x=>x.Title.StartsWith(txtSearch)).OrderByDescending(x => x.CreatedDate).ToList();
+            }
+
+            return View(note.ToList());
         }
 
         [HttpPost]
