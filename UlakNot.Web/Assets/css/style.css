@@ -2833,3 +2833,21 @@ ul.contact {
             .post .post-footer .comments-list .comment > .comments-list {
                 margin-left: 50px;
             }
+
+
+
+
+.flags {
+    width: 200px;
+    height: 32px;
+    /* saða almak için "float: right;" kullanabilirsiniz*/
+    float: left;
+}
+.flags ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+.flags ul li {
+    display: inline;
+}

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using System.Net;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using UlakNot.BusinessLayer.Control;
@@ -26,6 +28,21 @@ namespace UlakNot.Web.Controllers
         {
             BusinessLayer.CreateDatabase dbc = new BusinessLayer.CreateDatabase();
             return View(dbc);
+        }
+
+        public ActionResult ChangeLanguage(string LanguageAbbrevation, string redirectUrl)
+        {
+            if (LanguageAbbrevation != null)
+            {
+                Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(LanguageAbbrevation);
+                Thread.CurrentThread.CurrentUICulture = new CultureInfo(LanguageAbbrevation);
+            }
+
+            HttpCookie cookie = new HttpCookie("Language");
+            cookie.Value = LanguageAbbrevation;
+            Response.Cookies.Add(cookie);
+
+            return Redirect(redirectUrl);
         }
 
         public ActionResult Login()

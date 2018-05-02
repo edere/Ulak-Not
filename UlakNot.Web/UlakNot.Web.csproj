@@ -1169,6 +1169,8 @@
     <Content Include="Assets\images\bg.jpg" />
     <Content Include="Assets\images\bullet.png" />
     <Content Include="Assets\images\logoulaknot.png" />
+    <Content Include="Assets\images\turkey_flag.png" />
+    <Content Include="Assets\images\uk_flag.png" />
     <Content Include="Assets\images\ulaknotkucuk.png" />
     <Content Include="Assets\js\arama.js" />
     <Content Include="Assets\js\bag.js" />
@@ -1213,9 +1215,20 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\CustomHtmlHelpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Init\WebCommon.cs" />
     <Compile Include="Models\SessionManager.cs" />
+    <Compile Include="Resources\Lang.tr.Designer.cs">
+      <DependentUpon>Lang.tr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Lang.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Lang.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -1667,6 +1680,16 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Lang.tr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Lang.tr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Lang.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Lang.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

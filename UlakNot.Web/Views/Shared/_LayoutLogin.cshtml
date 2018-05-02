@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using KimO.Helper
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -39,6 +40,16 @@
                         </button>
                         <a class="navbar-brand"><img src="~/Assets/images/logoulaknot.png" alt="logo" /></a>
                     </div>
+                    
+
+
+                    <div class="flags pull-right">
+                        <ul>
+                            <li>@Html.ImageActionLink("Turkish", "ChangeLanguage", "Home", new { LanguageAbbrevation = "tr", redirectUrl = this.Request.RawUrl }, new { @class = "nav-link dropdown-toggle arrow-none waves-effect text-muted p-r-5" }, "~/Assets/images/turkey_flag.png")</li>
+                            <li>@Html.ImageActionLink("English", "ChangeLanguage", "Home", new { LanguageAbbrevation = "en", redirectUrl = this.Request.RawUrl }, new { @class = "nav-link dropdown-toggle arrow-none waves-effect text-muted p-l-5" }, "~/Assets/images/uk_flag.png")</li>
+                        </ul>
+                    </div>
+
                 </div><!-- /.container -->
             </nav>
         </header>

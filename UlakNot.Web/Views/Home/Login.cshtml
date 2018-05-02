@@ -2,7 +2,7 @@
 @model LoginModel
 
 @{
-    ViewBag.Title = "Giriş Yap";
+    ViewBag.Title = @Html.Raw(UlakNot.Web.Resources.Lang.l_title);
     Layout = "~/Views/Shared/_LayoutLogin.cshtml";
 }
 <link href="~/Assets/css/validation-summary.css" rel="stylesheet" />
@@ -14,7 +14,7 @@
         <div class="row">
             <div class="col-sm-5">
                 <div class="intro-texts">
-                    <h2 class="text-white">Aradığınız Notlara Erişin !!!</h2>
+                    <h2 class="text-white">@Html.Raw(UlakNot.Web.Resources.Lang.l_slogan)</h2>
                     <p>UlakNot kişilerin ders notlarına erişebileceği bir sosyal ağdır. UlakNot üzerinden etkileşimli olarak not paylaşabilir, notları görebilirsiniz. <br /> <br />Ne bekliyorsunuz? UlakNot'lu olun!</p>
                 </div>
             </div>
@@ -28,19 +28,19 @@
                                     <div class="well">
                                         <form id="loginForm" method="POST" action="~/Home/Login">
                                             <div class="form-group">
-                                                <label for="username" class="control-label">Kullanıcı Adı</label>
-                                                <input type="text" class="form-control" id="username" name="Username" title="Lütfen kullanıcı adını giriniz">
+                                                <label for="username" class="control-label">@Html.Raw(UlakNot.Web.Resources.Lang.l_username)</label>
+                                                <input type="text" class="form-control" id="username" name="Username" title="@Html.Raw(UlakNot.Web.Resources.Lang.l_input_username)">
                                                 <span class="help-block"></span>
                                             </div>
                                             <div class="form-group">
-                                                <label for="password" class="control-label">Şifre</label>
-                                                <input type="password" class="form-control" id="password" name="Password" title="Lütfen şifrenizi giriniz">
+                                                <label for="password" class="control-label">@Html.Raw(UlakNot.Web.Resources.Lang.l_password)</label>
+                                                <input type="password" class="form-control" id="password" name="Password" title="@Html.Raw(UlakNot.Web.Resources.Lang.l_input_password)">
                                                 <span class="help-block"></span>
                                             </div>
                                             <div id="loginErrorMsg" class="alert alert-error hide">Wrong username og password</div>
 
-                                            <button type="submit" class="btn btn-success btn-block">Giriş Yap</button>
-                                            <a href="/Home/Forgot" class="btn btn-default btn-block">Şifremi Unuttum</a>
+                                            <button type="submit" class="btn btn-success btn-block">@Html.Raw(UlakNot.Web.Resources.Lang.l_submit)</button>
+                                            <a href="/Home/Forgot" class="btn btn-default btn-block">@Html.Raw(UlakNot.Web.Resources.Lang.l_password)</a>
                                         </form>
                                     </div>
                                 </div>
@@ -54,7 +54,7 @@
                                         <li><span class="fa fa-check text-success"></span> Üyelerle Mesajlaş</li>
                                         <li><span class="fa fa-check text-success"></span> Etkileşimde Kal!</li>
                                     </ul>
-                                    <p><a href="/Home/Register" class="btn btn-info btn-block">Şimdi Üye Ol</a></p>
+                                    <p><a href="/Home/Register" class="btn btn-info btn-block">@Html.Raw(UlakNot.Web.Resources.Lang.l_register_now)</a></p>
                                 </div>
                             </div>
                         </div>
