@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
@@ -23,7 +24,7 @@ namespace UlakNot.Web.Controllers
         private UserManager userManager = new UserManager();
         private FriendManager friendManager = new FriendManager();
        
-        
+
         public ActionResult CreateDatabase()
         {
             BusinessLayer.CreateDatabase dbc = new BusinessLayer.CreateDatabase();
@@ -43,6 +44,13 @@ namespace UlakNot.Web.Controllers
             Response.Cookies.Add(cookie);
 
             return Redirect(redirectUrl);
+        }
+
+        // GET: Home
+        public ActionResult Index()
+        {
+            //BusinessLayer.CreateDatabase dbc = new BusinessLayer.CreateDatabase();
+            return View(noteManager.ListQueryable().OrderByDescending(x => x.CreatedDate).ToList());
         }
 
         public ActionResult Login()
@@ -219,13 +227,7 @@ namespace UlakNot.Web.Controllers
             return View();
         }
 
-        // GET: Home
-        public ActionResult Index()
-        {
-            //BusinessLayer.CreateDatabase dbc = new BusinessLayer.CreateDatabase();
-            return View(noteManager.ListQueryable().OrderByDescending(x => x.CreatedDate).ToList());
-        }
-
+        
         [HttpPost]
         public ActionResult Index(string txtSearch)
         {
@@ -387,6 +389,30 @@ namespace UlakNot.Web.Controllers
         public ActionResult FriendList(int? id)
         {
             return View(friendManager.ListQueryable());
+        }
+
+        public ActionResult Contact()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Contact(UnContact contact)
+        {
+            if (ModelState.IsValid)
+            {
+                var body = new StringBuilder();
+                body.AppendLine("Name: " + contact.Name);
+                body.AppendLine("Surname: " + contact.Surname);
+                body.AppendLine("Mail: " + contact.Mail);
+                body.AppendLine("Subject: " + contact.Subject);
+                body.AppendLine("Message: " + contact.Message);
+
+                Mail.SendMail(body,ToString());
+                ViewBag.Success = true;
+            }
+
+            return View();
         }
     }
 }

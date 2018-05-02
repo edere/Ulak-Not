@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewBag.Title = "Contact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <hr />
+    </div>
+</div>
+<div class="contact-us">
+    <div class="row">
+        <div class="col-md-8 col-sm-7">
+            <h4 class="grey">İletişime Geçin</h4>
+
+            @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "contact-form", @class= "contact-form", method="Post", action = "/Home/Contact" }))
+            {
+                if (ViewBag.Success != null && ViewBag.Success)
+                {
+                    <div id="wrapper">
+                        <div id="message-sent">
+                            <div id="close-button">
+                                <span>X</span>
+                            </div>
+                            <span>Mesajınız başarıyla gönderilmiştir.</span>
+                        </div>
+                    </div>
+                }
+
+
+
+                <div class="form-group">
+                    <i class="icon ion-person"></i>
+                    <input id="contact-name" type="text" name="Name" class="form-control" placeholder="Adınız *" required="required" data-error="Adınızı yazınız.">
+                </div>
+                <div class="form-group">
+                    <i class="icon ion-person"></i>
+                    <input id="contact-surname" type="text" name="Surname" class="form-control" placeholder="Soyadınız *" required="required" data-error="Soyadınızı yazınız.">
+                </div>
+                <div class="form-group">
+                    <i class="icon ion-email"></i>
+                    <input id="contact-email" type="text" name="Mail" class="form-control" placeholder="E-posta *" required="required" data-error="E-posta adresinizi yazınız.">
+                </div>
+                <div class="form-group">
+                    <i class="icon ion-android-call"></i>
+                    <input id="contact-phone" type="text" name="Subject" class="form-control" placeholder="Konu*" required="required" data-error="Konuyu yazınız.">
+                </div>
+                <div class="form-group">
+                    <textarea id="form-message" name="Message" class="form-control" placeholder="İletişime geçmek istediğiz mesajı yazınız *" rows="5" required="required" data-error="Mesajınızı yazınız."></textarea>
+                </div>
+
+                <button type="submit" class="btn-primary">Gönder</button>
+
+            }
+
+        </div>
+        <div class="col-md-4 col-sm-5">
+            <h4 class="grey">Bize Ulaşın</h4>
+            <div class="reach"><span class="phone-icon"><i class="icon ion-android-call"></i></span><p>533 666 8453</p></div>
+            <div class="reach"><span class="phone-icon"><i class="icon ion-email"></i></span><p>bilgi@turkves.com</p></div>
+            <div class="reach"><span class="phone-icon"><i class="icon ion-ios-location"></i></span><p>İstanbul / Üsküdar</p></div>
+            <ul class="list-inline social-icons">
+                <li><a href="#"><i class="icon ion-social-facebook"></i></a></li>
+                <li><a href="#"><i class="icon ion-social-twitter"></i></a></li>
+                <li><a href="#"><i class="icon ion-social-googleplus"></i></a></li>
+                <li><a href="#"><i class="icon ion-social-pinterest"></i></a></li>
+                <li><a href="#"><i class="icon ion-social-linkedin"></i></a></li>
+            </ul>
+        </div>
+    </div>
+</div>

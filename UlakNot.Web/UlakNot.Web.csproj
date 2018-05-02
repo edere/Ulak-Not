@@ -1216,6 +1216,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helper\CustomHtmlHelpers.cs" />
+    <Compile Include="Models\Mail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Init\WebCommon.cs" />
     <Compile Include="Models\SessionManager.cs" />
@@ -1646,6 +1647,7 @@
     <Content Include="Views\Administrator\NCreate.cshtml" />
     <Content Include="Views\Administrator\NEdit.cshtml" />
     <Content Include="Views\Administrator\NDelete.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
