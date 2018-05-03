@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.SessionState;
 using UlakNot.BusinessLayer.Control;
 using UlakNot.BusinessLayer.Results;
 using UlakNot.Entity;
@@ -23,7 +24,7 @@ namespace UlakNot.Web.Controllers
         private HashtagManager hashtagManager = new HashtagManager();
         private UserManager userManager = new UserManager();
         private FriendManager friendManager = new FriendManager();
-       
+
 
         public ActionResult CreateDatabase()
         {
@@ -71,6 +72,9 @@ namespace UlakNot.Web.Controllers
                     return View(model);
                 }
 
+               
+                var newSessionId = CreateSessionId(System.Web.HttpContext.Current);
+                SetSessionId(System.Web.HttpContext.Current, newSessionId);
                 Session["login"] = res.Result;
                 return RedirectToAction("Index", "Home");
             }
@@ -81,7 +85,41 @@ namespace UlakNot.Web.Controllers
         public ActionResult Logout()
         {
             Session.Clear();
+            AbandonSession();
+            Response.Cookies["ASP.NET_SessionId"].Expires = DateTime.Now.AddDays(-30);
             return RedirectToAction("Login");
+        }
+
+        public void AbandonSession()
+        {
+            Session.Clear();
+            Session.Abandon();
+            Session.RemoveAll();
+            if (Request.Cookies["ASP.NET_SessionId"] != null)
+            {
+                Response.Cookies["ASP.NET_SessionId"].Value = string.Empty;
+                Response.Cookies["ASP.NET_SessionId"].Expires = DateTime.Now.AddMonths(-20);
+            }
+        }
+
+        private static string CreateSessionId(HttpContext httpContext)
+        {
+            var manager = new SessionIDManager();
+
+            string newSessionId = manager.CreateSessionID(httpContext);
+
+            return newSessionId;
+        }
+
+        public static void SetSessionId(HttpContext httpContext, string newSessionId)
+        {
+            var manager = new SessionIDManager();
+
+            bool redirected;
+            bool cookieAdded;
+
+            manager.SaveSessionID(httpContext, newSessionId, out redirected, out cookieAdded);
+
         }
 
         public ActionResult Register()
@@ -227,7 +265,7 @@ namespace UlakNot.Web.Controllers
             return View();
         }
 
-        
+
         [HttpPost]
         public ActionResult Index(string txtSearch)
         {
@@ -239,7 +277,7 @@ namespace UlakNot.Web.Controllers
 
             else
             {
-               note = noteManager.ListQueryable().Where(x=>x.Title.StartsWith(txtSearch)).OrderByDescending(x => x.CreatedDate).ToList();
+                note = noteManager.ListQueryable().Where(x => x.Title.StartsWith(txtSearch)).OrderByDescending(x => x.CreatedDate).ToList();
             }
 
             return View(note.ToList());
@@ -247,7 +285,7 @@ namespace UlakNot.Web.Controllers
 
         public JsonResult GetSearchNotes(string txtSearch)
         {
-            List<string> result = noteManager.ListQueryable().Where(x=>x.Title.StartsWith(txtSearch)).Select(x=>x.Title).ToList();
+            List<string> result = noteManager.ListQueryable().Where(x => x.Title.StartsWith(txtSearch)).Select(x => x.Title).ToList();
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
@@ -408,7 +446,7 @@ namespace UlakNot.Web.Controllers
                 body.AppendLine("Subject: " + contact.Subject);
                 body.AppendLine("Message: " + contact.Message);
 
-                Mail.SendMail(body,ToString());
+                //Mail.SendMail(body,ToString());
                 ViewBag.Success = true;
             }
 
